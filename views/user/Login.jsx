@@ -41,9 +41,9 @@ class Login extends React.Component {
               />
             </div>
             <input
-              className="btn btn-primary"
+              className="btn btn-primary btn-block"
               type="submit"
-              value="Login"
+              value="Sign in"
             />
           </form>
         </div>

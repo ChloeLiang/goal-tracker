@@ -21,14 +21,26 @@ class New extends React.Component {
           <form action="/users/new" method="POST">
             <div className="form-group">
               <label htmlFor="name">Username</label>
-              <input type="text" name="name" className="form-control" />
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+              />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input type="password" name="password" className="form-control" />
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+              />
             </div>
             <div className="form-group text-center">
-              <input type="submit" className="btn btn-primary" value="Register" />
+              <input
+                type="submit"
+                className="btn btn-primary btn-block"
+                value="Register"
+              />
             </div>
           </form>
         </div>

@@ -1,6 +1,7 @@
 module.exports = (app, db) => {
 
   const users = require('./controllers/user')(db);
+  const goals = require('./controllers/goal')(db);
 
   /*
    *  =========================================
@@ -14,4 +15,12 @@ module.exports = (app, db) => {
 
   app.get('/users/new', users.newForm);
   app.post('/users/new', users.create);
+
+  /*
+   *  =========================================
+   *  Goals
+   *  =========================================
+   */
+
+  app.get('/goals', goals.index);
 };

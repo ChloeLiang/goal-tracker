@@ -2,14 +2,8 @@ const sha256 = require('js-sha256');
 const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
 module.exports = (db) => {
-
-  /**
-   * ===========================================
-   * Controller logic
-   * ===========================================
-   */
-
   const loginForm = (request, response) => {
+    //TODO: Automatically redirect the user to main page if logged in.
     response.render('user/Login');
   };
 
@@ -67,11 +61,6 @@ module.exports = (db) => {
       })
   };
 
-  /**
-   * ===========================================
-   * Export controller functions as a module
-   * ===========================================
-   */
   return {
     loginForm,
     login,

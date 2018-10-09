@@ -3,3 +3,12 @@ CREATE TABLE IF NOT EXISTS users (
   name TEXT,
   password TEXT
 );
+
+CREATE TABLE IF NOT EXISTS goals (
+  id SERIAL PRIMARY KEY,
+  title TEXT,
+  amount INTEGER,
+  unit TEXT,
+  period INTEGER,
+  user_id INTEGER
+);

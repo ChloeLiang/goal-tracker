@@ -32,7 +32,7 @@ app.engine('jsx', reactEngine);
 require('./routes')(app, db);
 
 app.get('/', (request, response) => {
-  response.send('Welcome To GoalTracker.');
+  response.redirect('/goals');
 });
 
 /**

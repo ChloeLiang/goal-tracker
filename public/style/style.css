@@ -2,3 +2,44 @@
 .container--login {
   max-width: 400px;
 }
+
+.container-main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+.main {
+  flex: 1 0 auto;
+  background: rgb(223, 223, 223);
+  display: flex;
+  padding: 0 10rem;
+}
+
+.sidebar {
+  flex: 0 0 20%;
+  border-right: 1px solid rgb(252, 239, 239);
+  padding: 2rem 0;
+}
+
+.sidebar-nav:link,
+.sidebar-nav:visited {
+  display: block;
+  padding: .5rem 0 .5rem .5rem;
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar-nav:hover,
+.sidebar-nav:active {
+  background: rgba(255, 255, 255, .6);
+}
+
+.goal {
+  flex: 1 0 auto;
+}
