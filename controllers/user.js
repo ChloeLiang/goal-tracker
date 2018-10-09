@@ -16,14 +16,18 @@ module.exports = (db) => {
   const login = (request, response) => {
     db.user.get(request.body.name)
       .then(queryResult => {
-        const hashedPassword = sha256(request.body.password);
-        if (hashedPassword !== queryResult.password) {
-          response.render('user/Login', { error: 'Invalid password' });
+        if (queryResult) {
+          const hashedPassword = sha256(request.body.password);
+          if (hashedPassword !== queryResult.password) {
+            response.render('user/Login', { error: 'Invalid password' });
+          } else {
+            const hashedUsername = sha256(queryResult.name + 'loggedIn' + SALT);
+            response.cookie('username', queryResult.name);
+            response.cookie('loggedIn', hashedUsername);
+            response.redirect('/');
+          }
         } else {
-          const hashedUsername = sha256(queryResult.name + 'loggedIn' + SALT);
-          response.cookie('username', queryResult.name);
-          response.cookie('loggedIn', hashedUsername);
-          response.redirect('/');
+          response.render('user/Login', { error: `Username doesn't exist.` });
         }
       })
       .catch(error => {
