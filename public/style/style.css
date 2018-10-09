@@ -1,0 +1,4 @@
+.container--register,
+.container--login {
+  max-width: 400px;
+}
