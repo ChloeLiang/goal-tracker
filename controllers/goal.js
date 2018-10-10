@@ -12,7 +12,12 @@ module.exports = (db) => {
     }
   };
 
+  const newForm = (request, response) => {
+    response.render('goal/New');
+  };
+
   return {
     index,
+    newForm,
   };
 };

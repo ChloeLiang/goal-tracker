@@ -7,11 +7,13 @@ class Navigation extends React.Component {
   render() {
     return (
       <Layout>
-        <div className="container-main">
+        <div className="container-body">
           <TopNav />
           <div className="main">
             <Sidebar />
-            {this.props.children}
+            <div className="container-content">
+              {this.props.children}
+            </div>
           </div>
         </div>
       </Layout>

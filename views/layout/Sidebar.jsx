@@ -4,8 +4,8 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar">
-        <a href="#" className="sidebar-nav">Today</a>
-        <a href="/goals" className="sidebar-nav">Goals</a>
+        <a href="#" className="sidebar__nav">Today</a>
+        <a href="/goals" className="sidebar__nav">Goals</a>
       </div>
     );
   }

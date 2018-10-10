@@ -3,11 +3,14 @@ const React = require('react');
 class Navigation extends React.Component {
   render() {
     return (
-      <nav className="nav navbar navbar-expand-lg navbar-dark bg-secondary">
-        <a className="navbar-brand" href="/">GoalTracker</a>
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <a className="nav-link" href="/logout">
+      <nav className="nav">
+        <a className="btn--nav nav__brand" href="/">GoalTracker</a>
+        <ul className="nav__list">
+          <li className="nav__item">
+            <a href="/goals/new" className="btn--nav nav__link">+ Add Goal</a>
+          </li>
+          <li className="nav__item">
+            <a className="btn--nav nav__link" href="/logout">
               Logout
             </a>
           </li>

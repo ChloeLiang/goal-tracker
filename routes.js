@@ -1,7 +1,7 @@
-module.exports = (app, db) => {
+module.exports = (app, db, isAuthenticated) => {
 
-  const users = require('./controllers/user')(db);
-  const goals = require('./controllers/goal')(db);
+  const users = require('./controllers/user')(db, isAuthenticated);
+  const goals = require('./controllers/goal')(db, isAuthenticated);
 
   /*
    *  =========================================
@@ -23,4 +23,5 @@ module.exports = (app, db) => {
    */
 
   app.get('/goals', goals.index);
+  app.get('/goals/new', goals.newForm);
 };
