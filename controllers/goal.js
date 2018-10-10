@@ -14,11 +14,11 @@ module.exports = (db) => {
   };
 
   const index = (request, response) => {
-    if (!isAuthenticated(request.cookies)) {
+    if (isAuthenticated(request.cookies)) {
+      response.render('goal/Index');
+    } else {
       response.redirect('/login');
     }
-
-    response.render('goal/Index');
   };
 
   const newForm = (request, response) => {
@@ -32,23 +32,21 @@ module.exports = (db) => {
   };
 
   const create = (request, response) => {
-    if (!isAuthenticated(request.cookies)) {
+    if (isAuthenticated(request.cookies)) {
+      db.goal.createGoal(request.body, request.cookies.userId)
+        .then(queryResult => {
+          db.goal.createGoalMeta(request.body, queryResult.id);
+        })
+        .then(queryResult => {
+          response.redirect('/goals');
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        });
+    } else {
       response.redirect('/login');
     }
-
-    db.goal.createGoal(request.body, request.cookies.userId)
-      .then(queryResult => {
-        console.log('successfully create goal');
-        db.goal.createGoalMeta(request.body, queryResult.id);
-      })
-      .then(queryResult => {
-        console.log('successfully create goal meta');
-        response.redirect('/goals');
-      })
-      .catch(error => {
-        console.log(error);
-        response.sendStatus(500);
-      });
   };
 
   return {
