@@ -149,7 +149,7 @@ body {
   border: none;
 }
 
-.btn {
+/* .btn {
   display: inline-block;
   font-size: 1.3rem;
   padding: 1.5rem 4rem;
@@ -165,7 +165,7 @@ body {
 .btn:active {
   background: var(--color-primary);
   color: white;
-}
+} */
 
 .heading--3 {
   font-size: 1.5rem;
@@ -192,11 +192,13 @@ body {
 
 .card {
   flex: 0 0 calc(48%);
-  background: white;
   padding: 1.5rem;
   margin: 1rem 0;
 }
 
 .progress {
   margin-bottom: .5rem;
+}
+
+.progress-bar {
 }

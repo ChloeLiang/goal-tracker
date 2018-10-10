@@ -58,7 +58,7 @@ module.exports = (db) => {
 
   const editForm = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.goal.get(request.params.id, request.cookies.userId)
+      db.goal.get(request.params.id)
         .then(queryResult => {
           response.render('goal/Edit', { goal: queryResult });
         })
@@ -73,7 +73,17 @@ module.exports = (db) => {
 
   const update = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      response.send('update success');
+      db.goal.updateGoal(request.params.id, request.body)
+        .then(queryResult => {
+          db.goal.updateGoalMeta(request.params.id, request.body);
+        })
+        .then(queryResult => {
+          response.redirect('/goals');
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        });
     } else {
       response.redirect('/login');
     }

@@ -20,3 +20,10 @@ CREATE TABLE IF NOT EXISTS goals_meta (
   repeat_interval INTEGER,
   goal_id INTEGER
 );
+
+CREATE TABLE IF NOT EXISTS progress (
+  id SERIAL PRIMARY KEY,
+  amount INTEGER,
+  date_added DATE,
+  goal_id INTEGER
+);
