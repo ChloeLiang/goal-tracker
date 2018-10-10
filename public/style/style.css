@@ -4,12 +4,17 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-primary: grey;
+}
+
 html {
   font-size: 62.5%;
 }
 
 body {
   font-size: 1.6rem;
+  font-family: 'Lato', sans-serif;
 }
 
 .container--register,
@@ -25,11 +30,15 @@ body {
 
 .container-content {
   padding: 2rem 1rem;
+  flex: 1 0 auto;
+  border-right: 1px solid rgb(252, 239, 239);
+  border-left: 1px solid rgb(252, 239, 239);
 }
 
 .nav {
+  flex: 0 0 5rem;
   padding: .5rem 10rem;
-  background: grey;
+  background: var(--color-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,7 +81,6 @@ body {
 
 .sidebar {
   flex: 0 0 20%;
-  border-right: 1px solid rgb(252, 239, 239);
   padding: 2rem 0;
 }
 
@@ -95,4 +103,83 @@ body {
 
 .color--white {
   color: white;
+}
+
+.form {
+  width: 80%;
+  margin: 3rem auto;
+}
+
+.form__description {
+  margin: 1rem 0;
+}
+
+.form__group {
+  width: 100%;
+  margin: 1.2rem 0;
+}
+
+.form__group:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.form__col-2 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form__label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: .5rem;
+}
+
+.form__label--unit {
+  text-align: right;
+  margin: -3rem 5rem 0 0;
+  color: grey;
+}
+
+.form__input {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 2px;
+  background-color: rbga(white, .5);
+  border: none;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 1.3rem;
+  padding: 1.5rem 4rem;
+  border: none;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10rem;
+  transition: all .2s;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.heading--3 {
+  font-size: 1.5rem;
+  margin: .3rem 0;
+}
+
+.text--small {
+  font-size: 1.2rem;
+}
+
+.u--center {
+  text-align: center;
+}
+
+.u--margin-y-big {
+  margin: 5rem 0;
 }

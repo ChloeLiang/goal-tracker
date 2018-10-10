@@ -1,4 +1,5 @@
 const sha256 = require('js-sha256');
+const moment = require('moment');
 const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
 module.exports = (db) => {
@@ -13,7 +14,9 @@ module.exports = (db) => {
   };
 
   const newForm = (request, response) => {
-    response.render('goal/New');
+    const startDate = moment().format('YYYY-MM-DD');
+    const endDate = moment().add(30, 'day').format('YYYY-MM-DD');
+    response.render('goal/New', { startDate, endDate });
   };
 
   return {
