@@ -45,7 +45,7 @@ module.exports = (db) => {
           db.goal.createGoalMeta(request.body, queryResult.id);
         })
         .then(queryResult => {
-          response.redirect('/goals');
+          response.redirect('/goals?status=active');
         })
         .catch(error => {
           console.log(error);
@@ -56,9 +56,34 @@ module.exports = (db) => {
     }
   };
 
+  const editForm = (request, response) => {
+    if (isAuthenticated(request.cookies)) {
+      db.goal.get(request.params.id)
+        .then(queryResult => {
+          response.render('goal/Edit', { goal: queryResult });
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        })
+    } else {
+      response.redirect('/login');
+    }
+  };
+
+  const update = (request, response) => {
+    if (isAuthenticated(request.cookies)) {
+      response.send('update success');
+    } else {
+      response.redirect('/login');
+    }
+  };
+
   return {
     getGoals,
     newForm,
     create,
+    editForm,
+    update,
   };
 };

@@ -41,7 +41,7 @@ module.exports = (pool) => {
 
   const getGoals = (status) => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT * FROM goals WHERE status = '${status}'`;
+      const queryString = `SELECT * FROM goals INNER JOIN goals_meta ON goals.id = goals_meta.goal_id WHERE status = '${status}'`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error getting goals', error);
@@ -54,9 +54,23 @@ module.exports = (pool) => {
     });
   };
 
+  const get = (id) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `SELECT * FROM goals INNER JOIN goals_meta ON goals.id = goals_meta.goal_id WHERE goals.id = ${id}`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error getting a goal', error);
+        } else {
+          resolve(queryResult.rows[0]);
+        }
+      });
+    });
+  };
+
   return {
     createGoal,
     createGoalMeta,
     getGoals,
+    get,
   };
 };

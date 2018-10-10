@@ -1,25 +1,23 @@
 const React = require('react');
+const moment = require('moment');
 const Navigation = require('../layout/Navigation');
 const FormGoal = require('./FormGoal');
 
-class New extends React.Component {
+class Edit extends React.Component {
   render() {
-    const goal = {
-      title: '',
-      amount: '',
-      unit: '',
-      start_date: this.props.startDate,
-      repeat_interval: 1,
-      end_date: this.props.endDate
-    };
+    const goal = this.props.goal;
+    goal.start_date = moment(goal.start_date).format('YYYY-MM-DD');
+    goal.end_date = moment(goal.end_date).format('YYYY-MM-DD');
+
+    const updateUrl = `/goals/${goal.id}?_method=PUT`;
 
     return (
       <Navigation>
         <FormGoal
+          action={updateUrl}
           title="Achieve your goal by dividing an amount over a period of time"
           subtitle="Ex: Solve 50 coding interview questions in a month"
-          action="/goals/new"
-          btn="Add Goal"
+          btn="Update Goal"
           goal={goal}
         />
       </Navigation >
@@ -27,4 +25,4 @@ class New extends React.Component {
   }
 }
 
-module.exports = New;
+module.exports = Edit;

@@ -22,7 +22,9 @@ module.exports = (app, db, isAuthenticated) => {
    *  =========================================
    */
 
-  app.get('/goals', goals.getGoals);
   app.get('/goals/new', goals.newForm);
+  app.get('/goals/:id/edit', goals.editForm);
+  app.get('/goals', goals.getGoals);
+  app.put('/goals/:id', goals.update);
   app.post('/goals/new', goals.create);
 };

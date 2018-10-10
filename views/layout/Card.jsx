@@ -3,6 +3,7 @@ const moment = require('moment');
 
 class Card extends React.Component {
   render() {
+    const editUrl = `goals/${this.props.id}/edit`;
     return (
       <div className="card">
         <h2 className="card__title">{this.props.title}</h2>
@@ -17,6 +18,9 @@ class Card extends React.Component {
         <div className="card__progress">
           <div className="progress-bar progress--user"></div>
           <div className="progress-bar progress--target"></div>
+        </div>
+        <div className="card__control">
+          <a href={editUrl} className="btn">Edit</a>
         </div>
       </div>
     );
