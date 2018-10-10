@@ -1,5 +1,6 @@
 const pg = require('pg');
 const user = require('./models/user');
+const goal = require('./models/goal');
 const url = require('url');
 
 let configs;
@@ -38,6 +39,7 @@ module.exports = {
    * ADD APP MODELS HERE
    */
   user: user(pool),
+  goal: goal(pool),
 
   // get a reference to end the connection pool at server end
   pool: pool

@@ -16,5 +16,6 @@ CREATE TABLE IF NOT EXISTS goals_meta (
   id SERIAL PRIMARY KEY,
   repeat_start DATE,
   repeat_interval INTEGER,
-  repeat_end DATE
+  repeat_end DATE,
+  goal_id INTEGER
 );

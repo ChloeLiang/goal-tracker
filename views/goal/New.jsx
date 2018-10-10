@@ -68,15 +68,15 @@ class New extends React.Component {
           <div className="form__group">
             <label
               className="form__label"
-              htmlFor="repeat__start"
+              htmlFor="repeat_start"
             >
               Start Date
             </label>
             <input
               className="form__input"
               type="date"
-              name="repeat__start"
-              id="repeat__start"
+              name="repeat_start"
+              id="repeat_start"
               defaultValue={this.props.startDate}
               required
             />
@@ -86,13 +86,13 @@ class New extends React.Component {
             <div className="form__group">
               <label
                 className="form__label"
-                htmlFor="repeat__interval"
+                htmlFor="repeat_interval"
               >
                 Repeat
             </label>
               <select
-                name="repeat__type"
-                id="repeat__type"
+                name="repeat_type"
+                id="repeat_type"
                 className="form__input">
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
@@ -103,21 +103,21 @@ class New extends React.Component {
             <div className="form__group">
               <label
                 className="form__label"
-                htmlFor="repeat__interval"
+                htmlFor="repeat_interval"
               >
                 Every
               </label>
               <input
                 className="form__input"
                 type="number"
-                name="repeat__interval"
-                id="repeat__interval"
+                name="repeat_interval"
+                id="repeat_interval"
                 defaultValue="1"
                 required
               />
               <label
                 className="form__label form__label--unit"
-                htmlFor="repeat__interval"
+                htmlFor="repeat_interval"
               >
                 day
               </label>
@@ -127,21 +127,21 @@ class New extends React.Component {
           <div className="form__group">
             <label
               className="form__label"
-              htmlFor="repeat__end"
+              htmlFor="repeat_end"
             >
               End Date
             </label>
             <input
               type="date"
               className="form__input"
-              name="repeat__end"
-              id="repeat__end"
+              name="repeat_end"
+              id="repeat_end"
               defaultValue={this.props.endDate}
               required
             />
           </div>
           <div className="form__group u--center u--margin-y-big">
-            <input className="btn" type="submit" name="Add Goal" />
+            <input className="btn" type="submit" value="Add Goal" />
           </div>
         </form>
       </Navigation >

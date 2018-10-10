@@ -24,4 +24,5 @@ module.exports = (app, db, isAuthenticated) => {
 
   app.get('/goals', goals.index);
   app.get('/goals/new', goals.newForm);
+  app.post('/goals/new', goals.create);
 };
