@@ -10,6 +10,7 @@ class Index extends React.Component {
       goals = this.props.goals.map(goal => {
         return (
           <Card
+            key={goal.id}
             id={goal.id}
             title={goal.title}
             startDate={goal.start_date}

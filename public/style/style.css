@@ -197,16 +197,6 @@ body {
   margin: 1rem 0;
 }
 
-.progress-bar {
-  height: 1rem;
-  border-radius: 10px;
-  margin: .5rem 0;
-}
-
-.progress--user {
-  background: green;
-}
-
-.progress--target {
-  background: grey;
+.progress {
+  margin-bottom: .5rem;
 }

@@ -16,8 +16,12 @@ class Card extends React.Component {
           <p>End Date: {moment(this.props.endDate).format('YYYY-MM-DD')}</p>
         </div>
         <div className="card__progress">
-          <div className="progress-bar progress--user"></div>
-          <div className="progress-bar progress--target"></div>
+          <div className="progress">
+            <div className="progress-bar" role="progressbar" style={{ width: '25%' }}>25%</div>
+          </div>
+          <div className="progress">
+            <div className="progress-bar" role="progressbar" style={{ width: '25%' }}>25%</div>
+          </div>
         </div>
         <div className="card__control">
           <a href={editUrl} className="btn">Edit</a>

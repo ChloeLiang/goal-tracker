@@ -23,6 +23,7 @@ module.exports = (app, db, isAuthenticated) => {
    */
 
   app.get('/goals/new', goals.newForm);
+  app.get('/goals/today', goals.getToday);
   app.get('/goals/:id/edit', goals.editForm);
   app.get('/goals', goals.getGoals);
   app.put('/goals/:id', goals.update);

@@ -15,7 +15,7 @@ module.exports = (db) => {
 
   const getGoals = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.goal.getGoals(request.query.status)
+      db.goal.getGoals(request.query.status, request.cookies.userId)
         .then(queryResult => {
           response.render('goal/Index', { goals: queryResult });
         })
@@ -58,7 +58,7 @@ module.exports = (db) => {
 
   const editForm = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.goal.get(request.params.id)
+      db.goal.get(request.params.id, request.cookies.userId)
         .then(queryResult => {
           response.render('goal/Edit', { goal: queryResult });
         })
@@ -79,11 +79,37 @@ module.exports = (db) => {
     }
   };
 
+  const getToday = (request, response) => {
+    if (isAuthenticated(request.cookies)) {
+      db.goal.getGoals('active', request.cookies.userId)
+        .then(queryResult => {
+          const goals = queryResult.filter(goal => {
+            const startDate = moment(goal.start_date, 'YYYY-MM-DD');
+            const endDate = moment(goal.end_date, 'YYYY-MM-DD');
+            const diff = moment().diff(startDate, 'days');
+            const isInToday = moment().isSameOrAfter(startDate)
+              && moment().isSameOrBefore(endDate)
+              && (diff % goal.repeat_interval === 0);
+            return isInToday;
+          });
+
+          response.render('goal/Index', { goals });
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        });
+    } else {
+      response.redirect('/login');
+    }
+  };
+
   return {
     getGoals,
     newForm,
     create,
     editForm,
     update,
+    getToday,
   };
 };
