@@ -9,13 +9,14 @@ CREATE TABLE IF NOT EXISTS goals (
   title TEXT,
   amount INTEGER,
   unit TEXT,
+  status TEXT DEFAULT 'active',
+  start_date DATE,
+  end_date DATE,
   user_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS goals_meta (
   id SERIAL PRIMARY KEY,
-  repeat_start DATE,
   repeat_interval INTEGER,
-  repeat_end DATE,
   goal_id INTEGER
 );

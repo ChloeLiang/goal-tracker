@@ -13,9 +13,16 @@ module.exports = (db) => {
     return false;
   };
 
-  const index = (request, response) => {
+  const getGoals = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      response.render('goal/Index');
+      db.goal.getGoals(request.query.status)
+        .then(queryResult => {
+          response.render('goal/Index', { goals: queryResult });
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        });
     } else {
       response.redirect('/login');
     }
@@ -50,7 +57,7 @@ module.exports = (db) => {
   };
 
   return {
-    index,
+    getGoals,
     newForm,
     create,
   };

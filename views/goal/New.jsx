@@ -68,15 +68,15 @@ class New extends React.Component {
           <div className="form__group">
             <label
               className="form__label"
-              htmlFor="repeat_start"
+              htmlFor="start_date"
             >
               Start Date
             </label>
             <input
               className="form__input"
               type="date"
-              name="repeat_start"
-              id="repeat_start"
+              name="start_date"
+              id="start_date"
               defaultValue={this.props.startDate}
               required
             />
@@ -127,15 +127,15 @@ class New extends React.Component {
           <div className="form__group">
             <label
               className="form__label"
-              htmlFor="repeat_end"
+              htmlFor="end_date"
             >
               End Date
             </label>
             <input
               type="date"
               className="form__input"
-              name="repeat_end"
-              id="repeat_end"
+              name="end_date"
+              id="end_date"
               defaultValue={this.props.endDate}
               required
             />

@@ -1,11 +1,13 @@
 module.exports = (pool) => {
   const createGoal = (goal, userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `INSERT INTO goals (title, amount, unit, user_id) VALUES ($1, $2, $3, $4) RETURNING *`;
+      const queryString = `INSERT INTO goals (title, amount, unit, start_date, end_date, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
       const values = [
         goal.title,
         goal.amount,
         goal.unit,
+        goal.start_date,
+        goal.end_date,
         userId
       ];
 
@@ -21,11 +23,9 @@ module.exports = (pool) => {
 
   const createGoalMeta = (goal, goalId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `INSERT INTO goals_meta (repeat_start, repeat_interval, repeat_end, goal_id) VALUES ($1, $2, $3, $4) RETURNING *`;
+      const queryString = `INSERT INTO goals_meta (repeat_interval, goal_id) VALUES ($1, $2) RETURNING *`;
       values = [
-        goal.repeat_start,
         goal.repeat_interval,
-        goal.repeat_end,
         goalId
       ];
 
@@ -39,8 +39,24 @@ module.exports = (pool) => {
     });
   };
 
+  const getGoals = (status) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `SELECT * FROM goals WHERE status = '${status}'`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error getting goals', error);
+        } else if (queryResult.rows.length === 0) {
+          resolve(null);
+        } else {
+          resolve(queryResult.rows);
+        }
+      });
+    });
+  };
+
   return {
     createGoal,
     createGoalMeta,
+    getGoals,
   };
 };
