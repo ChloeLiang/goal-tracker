@@ -18,20 +18,21 @@ module.exports = (db) => {
   // /goals?status=overdue
   const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      let data = {};
-      db.goal.index(request.cookies.userId)
-        .then(queryResult => {
-          data.goals = queryResult;
-          return db.progress.getTotal();
-        })
-        .then(queryResult => {
-          data.progressTotal = queryResult;
-          response.render('goal/Index', data);
-        })
-        .catch(error => {
-          console.log(error);
-          response.sendStatus(500);
-        });
+      response.render('goal/Index', { username: request.cookies.username });
+      // let data = {};
+      // db.goal.index(request.cookies.userId)
+      //   .then(queryResult => {
+      //     data.goals = queryResult;
+      //     return db.progress.getTotal();
+      //   })
+      //   .then(queryResult => {
+      //     data.progressTotal = queryResult;
+      //     response.render('goal/Index', data);
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //     response.sendStatus(500);
+      //   });
     } else {
       response.redirect('/login');
     }

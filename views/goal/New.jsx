@@ -15,13 +15,14 @@ class New extends React.Component {
 
     return (
       <Navigation>
-        <FormGoal
+        {/* <FormGoal
           title="Achieve your goal by dividing an amount over a period of time"
           subtitle="Ex: Solve 50 coding interview questions in a month"
           action="/goals/new"
           btn="Add Goal"
           goal={goal}
-        />
+        /> */}
+
       </Navigation >
     );
   }

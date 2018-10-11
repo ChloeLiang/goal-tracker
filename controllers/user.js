@@ -17,6 +17,7 @@ module.exports = (db) => {
           } else {
             const hashedUserId = sha256(queryResult.id + 'loggedIn' + SALT);
             response.cookie('userId', queryResult.id);
+            response.cookie('username', queryResult.name);
             response.cookie('loggedIn', hashedUserId);
             response.redirect('/');
           }
@@ -32,6 +33,7 @@ module.exports = (db) => {
 
   const logout = (request, response) => {
     response.clearCookie('userId');
+    response.clearCookie('username');
     response.clearCookie('loggedIn');
     response.redirect('/');
   };
@@ -52,6 +54,7 @@ module.exports = (db) => {
       .then(queryResult => {
         const hashedUserId = sha256(queryResult.id + 'loggedIn' + SALT);
         response.cookie('userId', queryResult.id);
+        response.cookie('username', queryResult.name);
         response.cookie('loggedIn', hashedUserId);
         response.redirect('/');
       })
