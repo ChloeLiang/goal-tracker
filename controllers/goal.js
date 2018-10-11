@@ -34,7 +34,7 @@ module.exports = (db) => {
       //     response.sendStatus(500);
       //   });
     } else {
-      response.redirect('/login');
+      response.redirect('/');
     }
   };
 
@@ -44,7 +44,7 @@ module.exports = (db) => {
       const endDate = moment().add(30, 'day').format('YYYY-MM-DD');
       response.render('goal/New', { startDate, endDate });
     } else {
-      response.redirect('/login');
+      response.redirect('/');
     }
   };
 
@@ -59,7 +59,7 @@ module.exports = (db) => {
           response.sendStatus(500);
         });
     } else {
-      response.redirect('/login');
+      response.redirect('/');
     }
   };
 
@@ -74,7 +74,7 @@ module.exports = (db) => {
           response.sendStatus(500);
         })
     } else {
-      response.redirect('/login');
+      response.redirect('/');
     }
   };
 
@@ -89,7 +89,7 @@ module.exports = (db) => {
           response.sendStatus(500);
         });
     } else {
-      response.redirect('/login');
+      response.redirect('/');
     }
   };
 

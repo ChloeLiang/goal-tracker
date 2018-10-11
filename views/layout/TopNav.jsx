@@ -7,7 +7,7 @@ class TopNav extends React.Component {
     if (this.props.username) {
       user = (
         <li className="nav-item">
-          <a className="nav-link" href="#">{this.props.username}</a>
+          <a className="nav-link text-info" href="#">{this.props.username}</a>
         </li>
       );
 
