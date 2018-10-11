@@ -16,10 +16,10 @@ module.exports = (db) => {
   // /goals?status=active
   // /goals?status=complete
   // /goals?status=overdue
-  const getGoals = (request, response) => {
+  const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       let data = {};
-      db.goal.getGoals(request.query.status, request.cookies.userId)
+      db.goal.index(request.cookies.userId)
         .then(queryResult => {
           data.goals = queryResult;
           return db.progress.getTotal();
@@ -49,12 +49,9 @@ module.exports = (db) => {
 
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.goal.createGoal(request.body, request.cookies.userId)
+      db.goal.create(request.body, request.cookies.userId)
         .then(queryResult => {
-          db.goal.createGoalMeta(request.body, queryResult.id);
-        })
-        .then(queryResult => {
-          response.redirect('/goals?status=active');
+          response.redirect('/goals');
         })
         .catch(error => {
           console.log(error);
@@ -82,10 +79,7 @@ module.exports = (db) => {
 
   const update = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.goal.updateGoal(request.params.id, request.body)
-        .then(queryResult => {
-          db.goal.updateGoalMeta(request.params.id, request.body);
-        })
+      db.goal.update(request.params.id, request.body)
         .then(queryResult => {
           response.redirect('/goals');
         })
@@ -125,7 +119,7 @@ module.exports = (db) => {
   // };
 
   return {
-    getGoals,
+    index,
     newForm,
     create,
     editForm,

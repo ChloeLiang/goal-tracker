@@ -5,7 +5,7 @@ class Card extends React.Component {
   render() {
     const editUrl = `/goals/${this.props.id}/edit`;
     const targetPercentage = `${this.props.amountTarget}%`;
-    const achievedPercentage = `${this.props.amountAchieved}%`;
+    const achievedPercentage = `${this.props.percentageAchieved}%`;
 
     return (
       <div className="card">

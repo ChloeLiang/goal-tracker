@@ -104,29 +104,6 @@ class FormGoal extends React.Component {
             </div>
           </div>
 
-          <div className="form__group">
-            <label
-              className="form__label"
-              htmlFor="repeat_interval"
-            >
-              Repeat every
-              </label>
-            <input
-              className="form__input"
-              type="number"
-              name="repeat_interval"
-              id="repeat_interval"
-              defaultValue={this.props.goal.repeat_interval}
-              required
-            />
-            <label
-              className="form__label form__label--unit"
-              htmlFor="repeat_interval"
-            >
-              day
-              </label>
-          </div>
-
           <div className="form__group u--center u--margin-y-big">
             <input className="btn" type="submit" value={this.props.btn} />
           </div>
