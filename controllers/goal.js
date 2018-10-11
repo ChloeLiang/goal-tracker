@@ -1,18 +1,6 @@
-const sha256 = require('js-sha256');
 const moment = require('moment');
-const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
-module.exports = (db) => {
-  const isAuthenticated = (cookie) => {
-    const userId = cookie.userId;
-    const hashedValue = sha256(userId + 'loggedIn' + SALT);
-    if (hashedValue === cookie.loggedIn) {
-      return true;
-    }
-
-    return false;
-  };
-
+module.exports = (db, isAuthenticated) => {
   // /goals?status=active
   // /goals?status=complete
   // /goals?status=overdue
@@ -38,19 +26,17 @@ module.exports = (db) => {
     }
   };
 
-  const newForm = (request, response) => {
-    if (isAuthenticated(request.cookies)) {
-      const startDate = moment().format('YYYY-MM-DD');
-      const endDate = moment().add(30, 'day').format('YYYY-MM-DD');
-      response.render('goal/New', { startDate, endDate });
-    } else {
-      response.redirect('/');
-    }
-  };
-
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       db.goal.create(request.body, request.cookies.userId)
+        .then(queryResult => {
+          let status = 'ongoing';
+          if (moment().isBefore(queryResult.start_date)) {
+            status = 'upcoming';
+          }
+
+          return db.goal.updateStatus(status, queryResult.id);
+        })
         .then(queryResult => {
           response.redirect('/goals');
         })
@@ -120,7 +106,6 @@ module.exports = (db) => {
 
   return {
     index,
-    newForm,
     create,
     editForm,
     update,

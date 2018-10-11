@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS goals (
   start_date DATE,
   end_date DATE,
   status TEXT,
-  complete_date DATE,
+  complete_date DATE DEFAULT null,
   user_id INTEGER
 );
 

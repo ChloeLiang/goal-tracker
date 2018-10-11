@@ -2,17 +2,7 @@ const sha256 = require('js-sha256');
 const moment = require('moment');
 const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
-module.exports = (db) => {
-  const isAuthenticated = (cookie) => {
-    const userId = cookie.userId;
-    const hashedValue = sha256(userId + 'loggedIn' + SALT);
-    if (hashedValue === cookie.loggedIn) {
-      return true;
-    }
-
-    return false;
-  };
-
+module.exports = (db, isAuthenticated) => {
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       db.progress.create(request.body)

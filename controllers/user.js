@@ -1,7 +1,7 @@
 const sha256 = require('js-sha256');
 const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
-module.exports = (db) => {
+module.exports = (db, isAuthenticated) => {
   const loginForm = (request, response) => {
     response.render('user/Login');
   };

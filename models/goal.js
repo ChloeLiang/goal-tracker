@@ -70,10 +70,25 @@ module.exports = (pool) => {
     });
   };
 
+  const updateStatus = (status, goalId) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE goals SET status = ($1) WHERE id = ($2)`;
+      const values = [status, goalId];
+      pool.query(queryString, values, (error, queryResult) => {
+        if (error) {
+          reject('error updating goal status', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
   return {
     create,
     index,
     get,
     update,
+    updateStatus
   };
 };

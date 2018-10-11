@@ -41,13 +41,13 @@ class Modal extends React.Component {
                     <div className="col-md-6">
                       <div className="form-group">
                         <label htmlFor="start_date" className="col-form-label">Start Date</label>
-                        <input type="date" className="form-control" name="start_date" id="start_date" defaultValue={now} required />
+                        <input type="date" className="form-control" name="start_date" id="start_date" defaultValue={now} min={now} required />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
                         <label htmlFor="end_date" className="col-form-label">End Date</label>
-                        <input type="date" className="form-control" name="end_date" id="end_date" defaultValue={thirtyDaysLater} required />
+                        <input type="date" className="form-control" name="end_date" id="end_date" defaultValue={thirtyDaysLater} min={now} required />
                       </div>
                     </div>
                   </div>
