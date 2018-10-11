@@ -18,9 +18,9 @@ module.exports = (pool) => {
     });
   };
 
-  const getTotal = () => {
+  const get = (goalId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT SUM(amount) AS total, goal_id FROM progress GROUP BY goal_id`;
+      const queryString = `SELECT * FROM progress WHERE goal_id = ${goalId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error getting a progress', error);
@@ -31,22 +31,12 @@ module.exports = (pool) => {
     });
   };
 
-  const getToday = () => {
-    return new Promise((resolve, reject) => {
-      const queryString = `SELECT SUM(amount) AS today, goal_id FROM progress WHERE created_at = CURRENT_DATE GROUP BY goal_id`;
-      pool.query(queryString, (error, queryResult) => {
-        if (error) {
-          reject('error getting a progress', error);
-        } else {
-          resolve(queryResult.rows);
-        }
-      });
-    });
+  const update = (goalId) => {
   };
 
   return {
     create,
-    getTotal,
-    getToday
+    get,
+    update
   };
 };
