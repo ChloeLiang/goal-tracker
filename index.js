@@ -2,6 +2,8 @@ const express = require('express');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const db = require('./db');
+const sha256 = require('js-sha256');
+const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
 /**
  * ===================================
@@ -23,16 +25,30 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', reactEngine);
 
+const isAuthenticated = (cookie) => {
+  const userId = cookie.userId;
+  const hashedValue = sha256(userId + 'loggedIn' + SALT);
+  if (hashedValue === cookie.loggedIn) {
+    return true;
+  }
+
+  return false;
+};
+
 /**
  * ===================================
  * Routes
  * ===================================
  */
 
-require('./routes')(app, db);
+require('./routes')(app, db, isAuthenticated);
 
 app.get('/', (request, response) => {
-  response.render('Home');
+  if (isAuthenticated(request.cookies)) {
+    response.redirect('/goals');
+  } else {
+    response.render('Home');
+  }
 });
 
 /**

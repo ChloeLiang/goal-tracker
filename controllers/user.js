@@ -3,7 +3,6 @@ const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
 module.exports = (db) => {
   const loginForm = (request, response) => {
-    //TODO: Automatically redirect the user to main page if logged in.
     response.render('user/Login');
   };
 
@@ -19,7 +18,7 @@ module.exports = (db) => {
             response.cookie('userId', queryResult.id);
             response.cookie('username', queryResult.name);
             response.cookie('loggedIn', hashedUserId);
-            response.redirect('/');
+            response.redirect('/goals');
           }
         } else {
           response.render('user/Login', { error: `Username doesn't exist.` });

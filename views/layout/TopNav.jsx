@@ -19,7 +19,7 @@ class TopNav extends React.Component {
 
       button = (
         <li className="nav-item">
-          <form class="form-inline">
+          <form className="form-inline">
             <button type="button" className="btn btn-primary btn-lg btn--nav" data-toggle="modal" data-target="#newGoalModal">+</button>
           </form>
         </li>
