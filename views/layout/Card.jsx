@@ -4,12 +4,14 @@ const moment = require('moment');
 class Card extends React.Component {
   render() {
     const editUrl = `/goals/${this.props.id}/edit`;
+    const targetPercentage = `${this.props.amountTarget}%`;
+    const achievedPercentage = `${this.props.amountAchieved}%`;
 
     return (
       <div className="card">
         <h2 className="card__title">{this.props.title}</h2>
         <p className="card__progess">
-          <span>{this.props.progressToday} / {this.props.amount}</span>
+          <span>{this.props.amountAchieved} / {this.props.amountTotal}</span>
           <span>{this.props.unit}</span>
         </p>
         <div className="card__interval">
@@ -18,10 +20,10 @@ class Card extends React.Component {
         </div>
         <div className="card__progress">
           <div className="progress" data-toggle="tooltip" data-placement="top" title="Your progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '25%' }}>25%</div>
+            <div className="progress-bar" role="progressbar" style={{ width: achievedPercentage }}>{achievedPercentage}</div>
           </div>
           <div className="progress" data-toggle="tooltip" data-placement="top" title="Target progress">
-            <div className="progress-bar" role="progressbar" style={{ width: '25%' }}>25%</div>
+            <div className="progress-bar" role="progressbar" style={{ width: targetPercentage }}>{targetPercentage}</div>
           </div>
         </div>
         <div className="card__control">

@@ -1,4 +1,5 @@
 const React = require('react');
+const moment = require('moment');
 const Navigation = require('../layout/Navigation');
 const Card = require('../layout/Card');
 
@@ -8,23 +9,20 @@ class Index extends React.Component {
 
     if (this.props.goals) {
       goals = this.props.goals.map(goal => {
+        const startDate = moment(goal.start_date, 'YYYY-MM-DD');
+        const endDate = moment(goal.end_date, 'YYYY-MM-DD');
+        const diff = endDate.diff(startDate, 'days');
+        const multiplier = moment().diff(startDate, 'days');
+        const amountTarget = Math.floor(goal.amount / diff * multiplier);
+
         const progressTotal = this.props.progressTotal.find(progress => {
           return progress.goal_id === goal.id;
         });
 
-        const progressToday = this.props.progressToday.find(progress => {
-          return progress.goal_id === goal.id;
-        });
-
         let totalProgress = 0;
-        let todayProgress = 0;
 
         if (progressTotal) {
           totalProgress = progressTotal.total;
-        }
-
-        if (progressToday) {
-          todayProgress = progressToday.today;
         }
 
         return (
@@ -35,9 +33,9 @@ class Index extends React.Component {
             startDate={goal.start_date}
             endDate={goal.end_date}
             status={goal.status}
-            amount={goal.amount}
-            progressTotal={totalProgress}
-            progressToday={todayProgress}
+            amountTotal={goal.amount}
+            amountTarget={amountTarget}
+            amountAchieved={totalProgress}
             unit={goal.unit}
           />
         );
