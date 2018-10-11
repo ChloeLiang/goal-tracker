@@ -94,8 +94,7 @@ module.exports = (db) => {
 
   // const getToday = (request, response) => {
   //   if (isAuthenticated(request.cookies)) {
-  //     const data = {};
-  //     db.goal.getGoals('active', request.cookies.userId)
+  //     db.goal.index(request.cookies.userId)
   //       .then(queryResult => {
   //         const goals = queryResult.filter(goal => {
   //           const startDate = moment(goal.start_date, 'YYYY-MM-DD');

@@ -4,7 +4,7 @@ const moment = require('moment');
 class Card extends React.Component {
   render() {
     const editUrl = `/goals/${this.props.id}/edit`;
-    const targetPercentage = `${this.props.amountTarget}%`;
+    const targetPercentage = `${this.props.percentageTarget}%`;
     const achievedPercentage = `${this.props.percentageAchieved}%`;
 
     return (

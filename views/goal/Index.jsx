@@ -11,7 +11,7 @@ class Index extends React.Component {
       goals = this.props.goals.map(goal => {
         const startDate = moment(goal.start_date, 'YYYY-MM-DD');
         const endDate = moment(goal.end_date, 'YYYY-MM-DD');
-        const diff = endDate.diff(startDate, 'days');
+        const diff = endDate.diff(startDate, 'days') + 1;
         const multiplier = moment().diff(startDate, 'days') + 1;
         let amountTarget;
         if (diff === 0) {
@@ -25,7 +25,7 @@ class Index extends React.Component {
         });
 
         let percentageAchieved;
-
+        const percentageTarget = amountTarget / goal.amount * 100;
         if (progressTotal.total >= goal.amount) {
           percentageAchieved = 100;
         } else if (progressTotal.total === 0) {
@@ -44,6 +44,7 @@ class Index extends React.Component {
             status={goal.status}
             amountTotal={goal.amount}
             amountTarget={amountTarget}
+            percentageTarget={percentageTarget}
             amountAchieved={progressTotal.total}
             percentageAchieved={percentageAchieved}
             unit={goal.unit}
