@@ -1,13 +1,20 @@
+const moment = require('moment');
+
 module.exports = (pool) => {
   const create = (goal, userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `INSERT INTO goals (title, amount, unit, start_date, end_date, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
+      let status = 'ongoing';
+      if (moment().isBefore(goal.start_date)) {
+        status = 'upcoming';
+      }
+      const queryString = `INSERT INTO goals (title, amount, unit, start_date, end_date, status, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
       const values = [
         goal.title,
         goal.amount,
         goal.unit,
         goal.start_date,
         goal.end_date,
+        status,
         userId
       ];
 
@@ -15,7 +22,7 @@ module.exports = (pool) => {
         if (error) {
           reject('error creating goal', error);
         } else {
-          resolve(queryResult.rows[0]);
+          resolve(queryResult);
         }
       });
     });
@@ -23,7 +30,7 @@ module.exports = (pool) => {
 
   const index = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT * FROM goals WHERE user_id = ${userId}`;
+      const queryString = `SELECT goals.*, SUM(progress.amount) AS progress_sum FROM goals LEFT JOIN progress ON goals.id = progress.goal_id WHERE user_id = ${userId} GROUP BY goals.id`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error getting goals', error);
@@ -70,10 +77,10 @@ module.exports = (pool) => {
     });
   };
 
-  const updateStatus = (status, goalId) => {
+  const updateOverdue = () => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = ($1) WHERE id = ($2)`;
-      const values = [status, goalId];
+      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE > end_date AND status != 'completed'`;
+      const values = ['overdue'];
       pool.query(queryString, values, (error, queryResult) => {
         if (error) {
           reject('error updating goal status', error);
@@ -89,6 +96,6 @@ module.exports = (pool) => {
     index,
     get,
     update,
-    updateStatus
+    updateOverdue
   };
 };

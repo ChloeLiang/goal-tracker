@@ -53,11 +53,25 @@ class Index extends React.Component {
     //   });
     // }
 
+    let goals;
+
+    if (this.props.goals) {
+
+    } else {
+      goals = (
+        <div className="col-md-6 mx-auto text-center">
+          <p>You don't have any goals.</p>
+        </div>
+      );
+    }
+
     return (
       <Navigation username={this.props.username}>
-        {/* <div className="container-goals">
-          {goals}
-        </div> */}
+        <div className="container-fluid mt-3 mb-5">
+          <div className="row">
+            {goals}
+          </div>
+        </div>
       </Navigation>
     );
   }

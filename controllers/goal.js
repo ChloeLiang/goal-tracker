@@ -6,7 +6,6 @@ module.exports = (db, isAuthenticated) => {
   // /goals?status=overdue
   const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      response.render('goal/Index', { username: request.cookies.username });
       // let data = {};
       // db.goal.index(request.cookies.userId)
       //   .then(queryResult => {
@@ -21,6 +20,21 @@ module.exports = (db, isAuthenticated) => {
       //     console.log(error);
       //     response.sendStatus(500);
       //   });
+      db.goal.updateOverdue()
+        .then(queryResult => {
+          return db.goal.index(request.cookies.userId)
+        })
+        .then(queryResult => {
+          const data = {
+            goals: queryResult,
+            username: request.cookies.username
+          }
+          response.render('goal/Index', data);
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        });
     } else {
       response.redirect('/');
     }
@@ -29,14 +43,6 @@ module.exports = (db, isAuthenticated) => {
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       db.goal.create(request.body, request.cookies.userId)
-        .then(queryResult => {
-          let status = 'ongoing';
-          if (moment().isBefore(queryResult.start_date)) {
-            status = 'upcoming';
-          }
-
-          return db.goal.updateStatus(status, queryResult.id);
-        })
         .then(queryResult => {
           response.redirect('/goals');
         })
