@@ -4,11 +4,12 @@ const moment = require('moment');
 class Card extends React.Component {
   render() {
     const editUrl = `/goals/${this.props.id}/edit`;
+
     return (
       <div className="card">
         <h2 className="card__title">{this.props.title}</h2>
         <p className="card__progess">
-          <span>progress / {this.props.amount}</span>
+          <span>{this.props.progressToday} / {this.props.amount}</span>
           <span>{this.props.unit}</span>
         </p>
         <div className="card__interval">
@@ -24,9 +25,13 @@ class Card extends React.Component {
           </div>
         </div>
         <div className="card__control">
-          <button className="btn btn-primary">Save Progress</button>
           <a href={editUrl} className="btn btn-primary">Edit</a>
         </div>
+        <form className="form-progress" action="/progress" method="POST">
+          <input type="hidden" name="goal_id" value={this.props.id} />
+          <input type="number" name="amount" className="form-control" placeholder="Enter the amount completed" />
+          <input type="submit" className="btn btn-primary" value="Add" />
+        </form>
       </div>
     );
   }

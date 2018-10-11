@@ -24,6 +24,6 @@ CREATE TABLE IF NOT EXISTS goals_meta (
 CREATE TABLE IF NOT EXISTS progress (
   id SERIAL PRIMARY KEY,
   amount INTEGER,
-  date_added DATE,
+  created_at DATE DEFAULT now(),
   goal_id INTEGER
 );

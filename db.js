@@ -1,6 +1,7 @@
 const pg = require('pg');
 const user = require('./models/user');
 const goal = require('./models/goal');
+const progress = require('./models/progress');
 const url = require('url');
 
 let configs;
@@ -40,6 +41,7 @@ module.exports = {
    */
   user: user(pool),
   goal: goal(pool),
+  progress: progress(pool),
 
   // get a reference to end the connection pool at server end
   pool: pool

@@ -1,7 +1,8 @@
-module.exports = (app, db, isAuthenticated) => {
+module.exports = (app, db) => {
 
-  const users = require('./controllers/user')(db, isAuthenticated);
-  const goals = require('./controllers/goal')(db, isAuthenticated);
+  const users = require('./controllers/user')(db);
+  const goals = require('./controllers/goal')(db);
+  const progress = require('./controllers/progress')(db);
 
   /*
    *  =========================================
@@ -23,9 +24,17 @@ module.exports = (app, db, isAuthenticated) => {
    */
 
   app.get('/goals/new', goals.newForm);
-  app.get('/goals/today', goals.getToday);
   app.get('/goals/:id/edit', goals.editForm);
   app.get('/goals', goals.getGoals);
   app.put('/goals/:id', goals.update);
   app.post('/goals/new', goals.create);
+
+  /*
+   *  =========================================
+   *  Goals
+   *  =========================================
+   */
+
+  app.get('/progress', progress.get);
+  app.post('/progress', progress.create);
 };

@@ -101,7 +101,7 @@ module.exports = (pool) => {
         }
       });
     });
-  }
+  };
 
   return {
     createGoal,
