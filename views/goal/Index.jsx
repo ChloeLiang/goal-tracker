@@ -1,7 +1,6 @@
 const React = require('react');
-const moment = require('moment');
 const Navigation = require('../layout/Navigation');
-const Card = require('../layout/Card');
+const Goal = require('./Goal');
 
 class Index extends React.Component {
   render() {
@@ -53,13 +52,57 @@ class Index extends React.Component {
     //   });
     // }
 
-    let goals;
+    const goals = this.props.goals;
+    let ongoingList, upcomingList, completedList;
 
-    if (this.props.goals) {
+    if (goals) {
+      const ongoing = goals.filter(goal => {
+        return goal.status === 'ongoing' || goal.status === 'overdue';
+      });
+
+      ongoingList = ongoing.map(goal => {
+        if (goal.status === 'ongoing') {
+          return (
+            <div key={goal.id} className="goal--ongoing col-md-6 my-2">
+              <Goal goal={goal} />
+            </div>
+          );
+        }
+
+        return (
+          <div key={goal.id} className="goal--overdue col-md-6 my-2">
+            <Goal goal={goal} />
+          </div>
+        );
+      });
+
+      const upcoming = goals.filter(goal => {
+        return goal.status === 'upcoming';
+      });
+
+      upcomingList = upcoming.map(goal => {
+        return (
+          <div key={goal.id} className="goal--upcoming col-md-6 my-2">
+            <Goal goal={goal} />
+          </div>
+        );
+      });
+
+      const completed = goals.filter(goal => {
+        return goal.status === 'completed';
+      });
+
+      completedList = completed.map(goal => {
+        return (
+          <div key={goal.id} className="goal--completed col-md-6 my-2">
+            <Goal goal={goal} />
+          </div>
+        );
+      });
 
     } else {
       goals = (
-        <div className="col-md-6 mx-auto text-center">
+        <div key={goal.id} className="col-md-6 mx-auto text-center">
           <p>You don't have any goals.</p>
         </div>
       );
@@ -67,9 +110,38 @@ class Index extends React.Component {
 
     return (
       <Navigation username={this.props.username}>
-        <div className="container-fluid mt-3 mb-5">
-          <div className="row">
-            {goals}
+        <div className="container-fluid container--main mt-3 mb-5">
+          <div className="container-fluid container--ongoing my-3">
+            <div className="row">
+              <div className="col">
+                <h4 className="lead">Ongoing</h4>
+              </div>
+            </div>
+            <div className="row">
+              {ongoingList}
+            </div>
+          </div>
+
+          <div className="container-fluid container--upcoming my-3">
+            <div className="row">
+              <div className="col">
+                <h4 className="lead">Upcoming</h4>
+              </div>
+            </div>
+            <div className="row">
+              {upcomingList}
+            </div>
+          </div>
+
+          <div className="container-fluid container--completed my-3">
+            <div className="row">
+              <div className="col">
+                <h4 className="lead">Completed</h4>
+              </div>
+            </div>
+            <div className="row">
+              {completedList}
+            </div>
           </div>
         </div>
       </Navigation>

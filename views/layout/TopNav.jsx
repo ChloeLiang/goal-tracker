@@ -2,7 +2,7 @@ const React = require('react');
 
 class TopNav extends React.Component {
   render() {
-    let register, login, logout, user, button;
+    let register, login, logout, user;
 
     if (this.props.username) {
       user = (
@@ -14,14 +14,6 @@ class TopNav extends React.Component {
       logout = (
         <li className="nav-item">
           <a className="nav-link" href="/logout">Logout</a>
-        </li>
-      );
-
-      button = (
-        <li className="nav-item">
-          <form className="form-inline">
-            <button type="button" className="btn btn-primary btn-lg btn--nav" data-toggle="modal" data-target="#newGoalModal">+</button>
-          </form>
         </li>
       );
     } else {
@@ -46,13 +38,22 @@ class TopNav extends React.Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-center ml-auto">
+            <li className="nav-item">
+              <a href="#ongoing" className="nav-link">Ongoing</a>
+            </li>
+            <li className="nav-item">
+              <a href="#upcoming" className="nav-link">upcoming</a>
+            </li>
+            <li className="nav-item">
+              <a href="#completed" className="nav-link">Completed</a>
+            </li>
             {register}
             {login}
             {user}
             {logout}
-            {button}
           </ul>
         </div>
+        <button type="button" className="btn btn-primary btn-lg btn--nav" data-toggle="modal" data-target="#newGoalModal">+</button>
       </nav>
     );
   }
