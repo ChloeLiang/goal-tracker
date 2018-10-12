@@ -4,13 +4,20 @@ module.exports = (db, isAuthenticated) => {
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       const goalId = request.body.goal_id;
-      const amount = parseInt(request.body.amount, 10);
-      db.progress.create(amount, goalId)
+      const progress = parseInt(request.body.amount, 10);
+      db.goal.updateProgress(goalId, progress)
         .then(queryResult => {
           return db.progress.get(goalId);
         })
         .then(queryResult => {
-          return db.goal.updateCompleted(goalId, queryResult);
+          if (queryResult) {
+            return db.progress.update(goalId, progress);
+          }
+
+          return db.progress.create(goalId, progress);
+        })
+        .then(queryResult => {
+          return db.goal.updateCompleted(goalId, progress);
         })
         .then(queryResult => {
           response.redirect('/goals');

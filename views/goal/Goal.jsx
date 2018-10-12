@@ -4,7 +4,7 @@ const moment = require('moment');
 class Goal extends React.Component {
   render() {
     const goal = this.props.goal;
-    let progress = goal.progress_sum || 0;
+    let progress = goal.progress || 0;
 
     if (progress > goal.amount) {
       progress = goal.amount;

@@ -30,7 +30,7 @@ module.exports = (pool) => {
 
   const index = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT goals.*, SUM(progress.amount) AS progress_sum FROM goals LEFT JOIN progress ON goals.id = progress.goal_id WHERE user_id = ${userId} GROUP BY goals.id`;
+      const queryString = `SELECT * FROM goals WHERE user_id = ${userId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error getting goals', error);
@@ -129,6 +129,19 @@ module.exports = (pool) => {
     });
   };
 
+  const updateProgress = (goalId, progress) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE goals SET progress = ${progress} WHERE id = ${goalId}`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error updating goal progress', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
   return {
     create,
     index,
@@ -137,6 +150,7 @@ module.exports = (pool) => {
     updateUpcoming,
     updateOngoing,
     updateCompleted,
-    updateOverdue
+    updateOverdue,
+    updateProgress
   };
 };
