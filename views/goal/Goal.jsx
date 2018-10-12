@@ -40,8 +40,8 @@ class Goal extends React.Component {
       secondBarWidth = progress - target;
     }
 
-    firstBarWidth = Math.floor(firstBarWidth / goal.amount * 100) + '%';
-    secondBarWidth = Math.floor(secondBarWidth / goal.amount * 100) + '%';
+    firstBarWidth = firstBarWidth / goal.amount * 100 + '%';
+    secondBarWidth = secondBarWidth / goal.amount * 100 + '%';
     const progressPercentage = Math.floor(progress / goal.amount * 100) + '%';
     const targetPercentage = Math.floor(target / goal.amount * 100) + '%';
 
