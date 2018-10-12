@@ -47,16 +47,16 @@ class Goal extends React.Component {
 
     let cardStyle = 'card shadow text-center';
     let cardHeaderStyle = 'card-header text-right';
-    if (goal.status === 'upcoming') {
+    if (goal.status === 0) {
       cardStyle = `${cardStyle} border-secondary`;
       cardHeaderStyle = `${cardHeaderStyle} bg-secondary`;
-    } else if (goal.status === 'ongoing') {
+    } else if (goal.status === 2) {
       cardStyle = `${cardStyle} border-primary`;
       cardHeaderStyle = `${cardHeaderStyle} bg-primary`;
-    } else if (goal.status === 'completed') {
+    } else if (goal.status === 3) {
       cardStyle = `${cardStyle} border-success`;
       cardHeaderStyle = `${cardHeaderStyle} bg-success`;
-    } else if (goal.status === 'overdue') {
+    } else if (goal.status === 1) {
       cardStyle = `${cardStyle} border-danger`;
       cardHeaderStyle = `${cardHeaderStyle} bg-danger`;
     }

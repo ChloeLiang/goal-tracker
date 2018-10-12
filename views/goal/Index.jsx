@@ -9,11 +9,11 @@ class Index extends React.Component {
 
     if (goals) {
       const ongoing = goals.filter(goal => {
-        return goal.status === 'ongoing' || goal.status === 'overdue';
+        return goal.status === 2 || goal.status === 1;
       });
 
       ongoingList = ongoing.map(goal => {
-        if (goal.status === 'ongoing') {
+        if (goal.status === 2) {
           return (
             <div key={goal.id} className="goal--ongoing col-sm-6 my-3">
               <Goal goal={goal} />
@@ -29,7 +29,7 @@ class Index extends React.Component {
       });
 
       const upcoming = goals.filter(goal => {
-        return goal.status === 'upcoming';
+        return goal.status === 0;
       });
 
       upcomingList = upcoming.map(goal => {
@@ -41,7 +41,7 @@ class Index extends React.Component {
       });
 
       const completed = goals.filter(goal => {
-        return goal.status === 'completed';
+        return goal.status === 3;
       });
 
       completedList = completed.map(goal => {

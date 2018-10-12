@@ -1,9 +1,7 @@
 const moment = require('moment');
 
 module.exports = (db, isAuthenticated) => {
-  // /goals?status=active
-  // /goals?status=complete
-  // /goals?status=overdue
+  // status: upcoming = 0, overdue = 1, ongoing = 2, completed = 3
   const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       const userId = request.cookies.userId;
