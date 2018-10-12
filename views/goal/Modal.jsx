@@ -17,7 +17,7 @@ class Modal extends React.Component {
               </button>
             </div>
             <div className="modal-body">
-              <form action="/goals/new" method="POST">
+              <form action="/goals" method="POST">
                 <div className="container-fluid">
                   <div className="row">
                     <div className="col-12">

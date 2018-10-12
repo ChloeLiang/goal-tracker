@@ -20,7 +20,7 @@ class New extends React.Component {
             <div className="col-md-6 mx-auto">
               <h1 className="mb-3">Register</h1>
               {error}
-              <form action="/users/new" method="POST">
+              <form action="/users" method="POST">
                 <div className="form-group">
                   <label htmlFor="name">Username</label>
                   <input

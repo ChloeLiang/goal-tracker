@@ -1,14 +1,19 @@
-const sha256 = require('js-sha256');
 const moment = require('moment');
-const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
 module.exports = (db, isAuthenticated) => {
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.progress.create(request.body)
+      const goalId = request.body.goal_id;
+      const amount = parseInt(request.body.amount, 10);
+      db.progress.create(amount, goalId)
         .then(queryResult => {
-          console.log('update progress successfully');
-          response.redirect('/goals?status=active');
+          return db.progress.get(goalId);
+        })
+        .then(queryResult => {
+          return db.goal.updateCompleted(goalId, queryResult);
+        })
+        .then(queryResult => {
+          response.redirect('/goals');
         })
         .catch(error => {
           console.log(error);
@@ -23,7 +28,7 @@ module.exports = (db, isAuthenticated) => {
     if (isAuthenticated(request.cookies)) {
       db.progress.getTotal()
         .then(queryResult => {
-          console.log(queryResult);
+          response.json(queryResult);
         })
         .catch(error => {
           console.log(error);

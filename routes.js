@@ -15,7 +15,7 @@ module.exports = (app, db, isAuthenticated) => {
   app.post('/login', users.login);
 
   app.get('/users/new', users.newForm);
-  app.post('/users/new', users.create);
+  app.post('/users', users.create);
 
   /*
    *  =========================================
@@ -26,7 +26,7 @@ module.exports = (app, db, isAuthenticated) => {
   app.get('/goals/:id/edit', goals.editForm);
   app.get('/goals', goals.index);
   app.put('/goals/:id', goals.update);
-  app.post('/goals/new', goals.create);
+  app.post('/goals', goals.create);
 
   /*
    *  =========================================

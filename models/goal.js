@@ -79,7 +79,7 @@ module.exports = (pool) => {
 
   const updateUpcoming = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE < start_date AND status != 'complete' AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE < start_date AND status != 'completed' AND user_id = ${userId}`;
       const values = ['upcoming'];
       pool.query(queryString, values, (error, queryResult) => {
         if (error) {
@@ -93,7 +93,7 @@ module.exports = (pool) => {
 
   const updateOngoing = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE >= start_date AND CURRENT_DATE <= end_date AND status != 'complete' AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE >= start_date AND CURRENT_DATE <= end_date AND status != 'completed' AND user_id = ${userId}`;
       const values = ['ongoing'];
       pool.query(queryString, values, (error, queryResult) => {
         if (error) {
@@ -105,9 +105,9 @@ module.exports = (pool) => {
     });
   };
 
-  const updateCompleted = (goalId) => {
+  const updateCompleted = (goalId, progress) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = ($1) WHERE id = ${goalId}`;
+      const queryString = `UPDATE goals SET status = ($1) WHERE id = ${goalId} AND ${progress} >= amount`;
       const values = ['completed'];
       pool.query(queryString, values, (error, queryResult) => {
         if (error) {
@@ -121,7 +121,7 @@ module.exports = (pool) => {
 
   const updateOverdue = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE > end_date AND status != 'complete' AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE > end_date AND status != 'completed' AND user_id = ${userId}`;
       const values = ['overdue'];
       pool.query(queryString, values, (error, queryResult) => {
         if (error) {
