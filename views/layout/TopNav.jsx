@@ -2,7 +2,7 @@ const React = require('react');
 
 class TopNav extends React.Component {
   render() {
-    let register, login, logout, user;
+    let register, login, logout, user, nav;
 
     if (this.props.username) {
       user = (
@@ -15,6 +15,20 @@ class TopNav extends React.Component {
         <li className="nav-item">
           <a className="nav-link" href="/logout">Logout</a>
         </li>
+      );
+
+      nav = (
+        <React.Fragment>
+          <li className="nav-item">
+            <a href="#ongoing" className="nav-link">Ongoing</a>
+          </li>
+          <li className="nav-item">
+            <a href="#upcoming" className="nav-link">upcoming</a>
+          </li>
+          <li className="nav-item">
+            <a href="#completed" className="nav-link">Completed</a>
+          </li>
+        </React.Fragment>
       );
     } else {
       register = (
@@ -31,22 +45,14 @@ class TopNav extends React.Component {
     }
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a className="navbar-brand" href="#">GoalTracker</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-center ml-auto">
-            <li className="nav-item">
-              <a href="#ongoing" className="nav-link">Ongoing</a>
-            </li>
-            <li className="nav-item">
-              <a href="#upcoming" className="nav-link">upcoming</a>
-            </li>
-            <li className="nav-item">
-              <a href="#completed" className="nav-link">Completed</a>
-            </li>
+            {nav}
             {register}
             {login}
             {user}
