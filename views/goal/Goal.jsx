@@ -13,8 +13,10 @@ class Goal extends React.Component {
     let multiplier;
     if (moment().isSameOrAfter(endDate)) {
       multiplier = diff;
-    } else {
+    } else if (moment().isSameOrAfter(startDate)) {
       multiplier = moment().diff(startDate, 'days') + 1;
+    } else {
+      multiplier = 0;
     }
 
     const target = Math.ceil(goal.amount / diff * multiplier);

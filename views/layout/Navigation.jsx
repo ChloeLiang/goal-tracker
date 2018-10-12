@@ -1,7 +1,7 @@
 const React = require('react');
 const Layout = require('./Layout');
 const TopNav = require('./TopNav');
-const Modal = require('./Modal');
+const Modal = require('../goal/New');
 
 class Navigation extends React.Component {
   render() {

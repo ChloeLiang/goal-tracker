@@ -6,23 +6,16 @@ module.exports = (db, isAuthenticated) => {
   // /goals?status=overdue
   const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      // let data = {};
-      // db.goal.index(request.cookies.userId)
-      //   .then(queryResult => {
-      //     data.goals = queryResult;
-      //     return db.progress.getTotal();
-      //   })
-      //   .then(queryResult => {
-      //     data.progressTotal = queryResult;
-      //     response.render('goal/Index', data);
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //     response.sendStatus(500);
-      //   });
-      db.goal.updateOverdue()
+      const userId = request.cookies.userId;
+      db.goal.updateUpcoming(userId)
         .then(queryResult => {
-          return db.goal.index(request.cookies.userId)
+          return db.goal.updateOngoing(userId);
+        })
+        .then(queryResult => {
+          return db.goal.updateOverdue(userId);
+        })
+        .then(queryResult => {
+          return db.goal.index(userId);
         })
         .then(queryResult => {
           const data = {
@@ -85,36 +78,10 @@ module.exports = (db, isAuthenticated) => {
     }
   };
 
-  // const getToday = (request, response) => {
-  //   if (isAuthenticated(request.cookies)) {
-  //     db.goal.index(request.cookies.userId)
-  //       .then(queryResult => {
-  //         const goals = queryResult.filter(goal => {
-  //           const startDate = moment(goal.start_date, 'YYYY-MM-DD');
-  //           const endDate = moment(goal.end_date, 'YYYY-MM-DD');
-  //           const diff = moment().diff(startDate, 'days');
-  //           const isInToday = moment().isSameOrAfter(startDate)
-  //             && moment().isSameOrBefore(endDate)
-  //             && (diff % goal.repeat_interval === 0);
-  //           return isInToday;
-  //         });
-
-  //         response.render('goal/Index', { goals });
-  //       })
-  //       .catch(error => {
-  //         console.log(error);
-  //         response.sendStatus(500);
-  //       });
-  //   } else {
-  //     response.redirect('/login');
-  //   }
-  // };
-
   return {
     index,
     create,
     editForm,
     update,
-    // getToday
   };
 };

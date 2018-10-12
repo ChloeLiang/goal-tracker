@@ -77,13 +77,55 @@ module.exports = (pool) => {
     });
   };
 
-  const updateOverdue = () => {
+  const updateUpcoming = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE > end_date AND status != 'completed'`;
+      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE < start_date AND status != 'complete' AND user_id = ${userId}`;
+      const values = ['upcoming'];
+      pool.query(queryString, values, (error, queryResult) => {
+        if (error) {
+          reject('error updating goal status to upcoming', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
+  const updateOngoing = (userId) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE >= start_date AND CURRENT_DATE <= end_date AND status != 'complete' AND user_id = ${userId}`;
+      const values = ['ongoing'];
+      pool.query(queryString, values, (error, queryResult) => {
+        if (error) {
+          reject('error updating goal status to ongoing', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
+  const updateCompleted = (goalId) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE goals SET status = ($1) WHERE id = ${goalId}`;
+      const values = ['completed'];
+      pool.query(queryString, values, (error, queryResult) => {
+        if (error) {
+          reject('error updating goal status to completed', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
+  const updateOverdue = (userId) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE goals SET status = ($1) WHERE CURRENT_DATE > end_date AND status != 'complete' AND user_id = ${userId}`;
       const values = ['overdue'];
       pool.query(queryString, values, (error, queryResult) => {
         if (error) {
-          reject('error updating goal status', error);
+          reject('error updating goal status to overdue', error);
         } else {
           resolve(queryResult);
         }
@@ -96,6 +138,9 @@ module.exports = (pool) => {
     index,
     get,
     update,
+    updateUpcoming,
+    updateOngoing,
+    updateCompleted,
     updateOverdue
   };
 };
