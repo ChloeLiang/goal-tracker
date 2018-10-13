@@ -1,8 +1,8 @@
-module.exports = (app, db, isAuthenticated) => {
+module.exports = (app, db, isAuthenticated, upload) => {
 
-  const users = require('./controllers/user')(db, isAuthenticated);
-  const goals = require('./controllers/goal')(db, isAuthenticated);
-  const progress = require('./controllers/progress')(db, isAuthenticated);
+  const users = require('./controllers/user')(db, upload);
+  const goals = require('./controllers/goal')(db, isAuthenticated, upload);
+  const progress = require('./controllers/progress')(db, isAuthenticated, upload);
 
   /*
    *  =========================================

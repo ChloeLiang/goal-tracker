@@ -2,6 +2,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const db = require('./db');
+const multer = require('multer');
 const sha256 = require('js-sha256');
 const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
@@ -13,6 +14,7 @@ const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
 const app = express();
 
+const upload = multer({ dest: 'public/uploads/' });
 app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(express.static('public'));
@@ -41,7 +43,7 @@ const isAuthenticated = (cookie) => {
  * ===================================
  */
 
-require('./routes')(app, db, isAuthenticated);
+require('./routes')(app, db, isAuthenticated, upload);
 
 app.get('/', (request, response) => {
   if (isAuthenticated(request.cookies)) {

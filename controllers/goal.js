@@ -1,6 +1,4 @@
-const moment = require('moment');
-
-module.exports = (db, isAuthenticated) => {
+module.exports = (db, isAuthenticated, upload) => {
   // status: upcoming = 0, overdue = 1, ongoing = 2, completed = 3
   const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {

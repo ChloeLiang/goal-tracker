@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-module.exports = (db, isAuthenticated) => {
+module.exports = (db, isAuthenticated, upload) => {
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       const goalId = request.body.goal_id;
