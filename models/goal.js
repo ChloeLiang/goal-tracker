@@ -7,11 +7,12 @@ module.exports = (pool) => {
       if (moment().isBefore(goal.start_date)) {
         status = 0;
       }
-      const queryString = `INSERT INTO goals (title, amount, unit, start_date, end_date, status, user_id, cover) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
+      const queryString = `INSERT INTO goals (title, amount, unit, progress, start_date, end_date, status, user_id, cover) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
       const values = [
         goal.title,
         goal.amount,
         goal.unit,
+        0,
         goal.start_date,
         goal.end_date,
         status,
