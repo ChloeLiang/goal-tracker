@@ -37,7 +37,7 @@ class Goal extends React.Component {
       firstBarWidth = progress;
       secondBarWidth = target - progress;
     } else {
-      secondBarStyle = `${barStyle} bg-success`;
+      secondBarStyle = `${barStyle} bg-primary`;
       firstBarWidth = target;
       secondBarWidth = progress - target;
     }
@@ -49,12 +49,14 @@ class Goal extends React.Component {
 
     let cardStyle = 'card shadow text-center';
     let cardHeaderStyle = 'card-header text-right';
+
+    // status: upcoming = 0, overdue = 1, ongoing = 2, completed = 3
     if (goal.status === 0) {
       cardStyle = `${cardStyle} border-secondary`;
       cardHeaderStyle = `${cardHeaderStyle} bg-secondary`;
     } else if (goal.status === 2) {
-      cardStyle = `${cardStyle} border-primary`;
-      cardHeaderStyle = `${cardHeaderStyle} bg-primary`;
+      cardStyle = `${cardStyle} border-warning`;
+      cardHeaderStyle = `${cardHeaderStyle} bg-warning`;
     } else if (goal.status === 3) {
       cardStyle = `${cardStyle} border-success`;
       cardHeaderStyle = `${cardHeaderStyle} bg-success`;
@@ -66,8 +68,14 @@ class Goal extends React.Component {
     return (
       <div className={cardStyle}>
         <div className={cardHeaderStyle}>
-          <i className="fas fa-edit"></i>
-          <i className="fas fa-trash"></i>
+          <div className="dropdown">
+            <button className="btn bg-transparent dropdown-toggle py-0" type="button" id="dropdownGoalMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i className="fas fa-ellipsis-h"></i>
+            </button>
+            <div className="dropdown-menu" aria-labelledby="dropdownGoalMenuButton">
+              <a className="dropdown-item" href={`/goals/${goal.id}/edit`}>Edit</a>
+            </div>
+          </div>
         </div>
         <div className="card-body">
           <h5 className="card-title">{goal.title}</h5>
