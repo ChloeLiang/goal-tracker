@@ -59,10 +59,24 @@ module.exports = (pool) => {
     });
   };
 
+  const destroy = (goalId) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `DELETE from progress WHERE goal_id = ${goalId}`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error deleting progress', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
   return {
     create,
     index,
     get,
-    update
+    update,
+    destroy
   };
 };

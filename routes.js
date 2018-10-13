@@ -26,6 +26,7 @@ module.exports = (app, db, isAuthenticated) => {
   app.get('/goals', goals.index);
   app.put('/goals/:id', goals.update);
   app.post('/goals', goals.create);
+  app.delete('/goals/:id', goals.destroy);
 
   /*
    *  =========================================

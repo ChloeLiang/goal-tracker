@@ -79,10 +79,28 @@ module.exports = (db, isAuthenticated) => {
     }
   };
 
+  const destroy = (request, response) => {
+    if (isAuthenticated(request.cookies)) {
+      const goalId = request.params.id;
+      db.goal.destroy(goalId)
+        .then(queryResult => {
+          return db.progress.destroy(goalId);
+        })
+        .then(queryResult => {
+          response.redirect('/goals');
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        });
+    }
+  };
+
   return {
     index,
     create,
     editForm,
     update,
+    destroy
   };
 };

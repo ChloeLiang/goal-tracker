@@ -129,6 +129,9 @@ class Goal extends React.Component {
             </button>
             <div className="dropdown-menu" aria-labelledby="dropdownGoalMenuButton">
               <button type="button" className="btn" data-toggle="modal" data-target="#editGoalModal" data-goalid={goal.id} data-title={goal.title} data-amount={goal.amount} data-unit={goal.unit} data-start={startDate.format('YYYY-MM-DD')} data-end={endDate.format('YYYY-MM-DD')}>Edit</button>
+              <form action={`/goals/${goal.id}?_method=DELETE`} method="POST">
+                <input type="submit" className="btn" value="Delete" />
+              </form>
             </div>
           </div>
         </div>

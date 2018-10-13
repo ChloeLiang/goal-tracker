@@ -79,7 +79,7 @@ module.exports = (pool) => {
 
   const updateUpcoming = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 0 WHERE CURRENT_DATE < start_date AND progress < amount AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = 0, complete_date = NULL WHERE CURRENT_DATE < start_date AND progress < amount AND user_id = ${userId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to upcoming', error);
@@ -92,7 +92,7 @@ module.exports = (pool) => {
 
   const updateOngoing = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 2 WHERE CURRENT_DATE >= start_date AND CURRENT_DATE <= end_date AND progress < amount AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = 2, complete_date = NULL WHERE CURRENT_DATE >= start_date AND CURRENT_DATE <= end_date AND progress < amount AND user_id = ${userId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to ongoing', error);
@@ -118,7 +118,7 @@ module.exports = (pool) => {
 
   const updateOverdue = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 1 WHERE CURRENT_DATE > end_date AND progress < amount AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = 1, complete_date = NULL WHERE CURRENT_DATE > end_date AND progress < amount AND user_id = ${userId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to overdue', error);
@@ -142,6 +142,19 @@ module.exports = (pool) => {
     });
   };
 
+  const destroy = (goalId) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `DELETE from goals WHERE id = ${goalId}`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error deleting goal', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
   return {
     create,
     index,
@@ -151,6 +164,7 @@ module.exports = (pool) => {
     updateOngoing,
     updateCompleted,
     updateOverdue,
-    updateProgress
+    updateProgress,
+    destroy
   };
 };
