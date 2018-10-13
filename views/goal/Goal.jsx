@@ -73,12 +73,14 @@ class Goal extends React.Component {
           <h5 className="card-title">{goal.title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">Due: {moment(goal.end_date).format('YYYY-MM-DD')}</h6>
           <div className="row my-3">
-            <div className="col">
-              {progressPercentage}
+            <div className="col d-flex justify-content-center align-items-center">
+              <span className="h5">
+                {progressPercentage}
+              </span>
             </div>
-            <div className="col">
-              <button type="button" className="btn btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}>
-                <i className="fas fa-plus"></i>
+            <div className="col d-flex justify-content-center align-items-center">
+              <button type="button" className="btn btn-lg btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}>
+                <i className="fas fa-pencil-alt"></i>
               </button>
               <div className="modal fade" id="newProgressModal" tabIndex="-1" role="dialog" aria-labelledby="newProgressModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
@@ -108,8 +110,8 @@ class Goal extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col">
-              <p className="h4">{progress} / {target}</p>
+            <div className="col d-flex justify-content-center align-items-center">
+              <p className="h5">{progress} / {target}</p>
             </div>
           </div>
           <div className="progress" data-toggle="tooltip" data-placement="bottom" title={`${progressPercentage} / ${targetPercentage}`}>
