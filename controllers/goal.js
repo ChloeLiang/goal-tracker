@@ -5,7 +5,10 @@ module.exports = (db, isAuthenticated) => {
   const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       const userId = request.cookies.userId;
-      db.goal.updateUpcoming(userId)
+      db.goal.updateCompleted(userId)
+        .then(queryResult => {
+          return db.goal.updateUpcoming(userId);
+        })
         .then(queryResult => {
           return db.goal.updateOngoing(userId);
         })

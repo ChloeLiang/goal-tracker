@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS goals (
   id SERIAL PRIMARY KEY,
   title TEXT,
   amount INTEGER,
-  progress INTEGER DEFAULT 0,
+  progress INTEGER,
   unit TEXT,
   start_date DATE,
   end_date DATE,

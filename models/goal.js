@@ -79,7 +79,7 @@ module.exports = (pool) => {
 
   const updateUpcoming = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 0 WHERE CURRENT_DATE < start_date AND status != 3 AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = 0 WHERE CURRENT_DATE < start_date AND progress < amount AND user_id = ${userId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to upcoming', error);
@@ -92,7 +92,7 @@ module.exports = (pool) => {
 
   const updateOngoing = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 2 WHERE CURRENT_DATE >= start_date AND CURRENT_DATE <= end_date AND status != 3 AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = 2 WHERE CURRENT_DATE >= start_date AND CURRENT_DATE <= end_date AND progress < amount AND user_id = ${userId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to ongoing', error);
@@ -103,9 +103,9 @@ module.exports = (pool) => {
     });
   };
 
-  const updateCompleted = (goalId, progress) => {
+  const updateCompleted = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 3, complete_date = CURRENT_DATE WHERE id = ${goalId} AND ${progress} >= amount`;
+      const queryString = `UPDATE goals SET status = 3, complete_date = CURRENT_DATE WHERE user_id = ${userId} AND progress >= amount`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to completed', error);
@@ -118,7 +118,7 @@ module.exports = (pool) => {
 
   const updateOverdue = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 1 WHERE CURRENT_DATE > end_date AND status != 3 AND user_id = ${userId}`;
+      const queryString = `UPDATE goals SET status = 1 WHERE CURRENT_DATE > end_date AND progress < amount AND user_id = ${userId}`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to overdue', error);
