@@ -5,24 +5,28 @@ const Goal = require('./Goal');
 class Index extends React.Component {
   render() {
     const goals = this.props.goals;
-    let ongoingList, upcomingList, completedList;
+    let ongoingList, upcomingList, completedList, overdueList;
 
     if (goals) {
       const ongoing = goals.filter(goal => {
-        return goal.status === 2 || goal.status === 1;
+        return goal.status === 2;
       });
 
       ongoingList = ongoing.map(goal => {
-        if (goal.status === 2) {
-          return (
-            <div key={goal.id} className="goal--ongoing col-sm-6 my-3">
-              <Goal goal={goal} />
-            </div>
-          );
-        }
-
         return (
-          <div key={goal.id} className="goal--overdue col-sm-6 my-3">
+          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
+            <Goal goal={goal} />
+          </div>
+        );
+      });
+
+      const overdue = goals.filter(goal => {
+        return goal.status === 1;
+      });
+
+      overdueList = overdue.map(goal => {
+        return (
+          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
             <Goal goal={goal} />
           </div>
         );
@@ -34,7 +38,7 @@ class Index extends React.Component {
 
       upcomingList = upcoming.map(goal => {
         return (
-          <div key={goal.id} className="goal--upcoming col-sm-6 my-3">
+          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
             <Goal goal={goal} />
           </div>
         );
@@ -46,7 +50,7 @@ class Index extends React.Component {
 
       completedList = completed.map(goal => {
         return (
-          <div key={goal.id} className="goal--completed col-sm-6 my-3">
+          <div key={goal.id} className="col-sm-6 col-md-12 my-3">
             <Goal goal={goal} />
           </div>
         );
@@ -74,36 +78,37 @@ class Index extends React.Component {
 
     return (
       <Navigation username={this.props.username}>
-        <div className="container-fluid container--main my-5 py-3">
+        <div id="main" className="container-fluid my-5 py-3">
           <div id="ongoing" className="container-fluid my-3">
-            <div className="row text-center">
+            <div className="row text-center mb-3">
               <div className="col">
                 <h6>Ongoing</h6>
               </div>
             </div>
-            <div className="row">
+            <div className="row container-goal mb-5">
+              {overdueList}
               {ongoingList}
             </div>
           </div>
 
           <div id="upcoming" className="container-fluid my-3">
             <div className="row">
-              <div className="col text-center">
+              <div className="col text-center mb-3">
                 <h6>Upcoming</h6>
               </div>
             </div>
-            <div className="row">
+            <div className="row container-goal mb-5">
               {upcomingList}
             </div>
           </div>
 
           <div id="completed" className="container-fluid my-3">
             <div className="row">
-              <div className="col text-center">
+              <div className="col text-center mb-3">
                 <h6>Completed</h6>
               </div>
             </div>
-            <div className="row">
+            <div className="row container-goal mb-5">
               {completedList}
             </div>
           </div>

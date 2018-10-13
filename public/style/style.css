@@ -19,7 +19,39 @@
 }
 
 @media (min-width: 992px) {
+  .nav-goal {
+    display: none;
+  }
 
+  #main {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+  }
+
+  #upcoming,
+  #ongoing,
+  #completed {
+    flex: 0 0 calc(100% / 3);
+  }
+
+  .container-goal {
+    height: 85%;
+    overflow-y: scroll;
+  }
+
+  #upcoming {
+    order: 1;
+  }
+
+  #ongoing {
+    order: 2;
+  }
+
+  #completed {
+    order: 3;
+  }
 }
 
 @media (min-width: 1200px) {

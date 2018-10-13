@@ -19,13 +19,13 @@ class TopNav extends React.Component {
 
       nav = (
         <React.Fragment>
-          <li className="nav-item">
+          <li className="nav-item nav-goal">
             <a href="#ongoing" className="nav-link">Ongoing</a>
           </li>
-          <li className="nav-item">
+          <li className="nav-item nav-goal">
             <a href="#upcoming" className="nav-link">upcoming</a>
           </li>
-          <li className="nav-item">
+          <li className="nav-item nav-goal">
             <a href="#completed" className="nav-link">Completed</a>
           </li>
         </React.Fragment>
