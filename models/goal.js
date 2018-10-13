@@ -105,7 +105,7 @@ module.exports = (pool) => {
 
   const updateCompleted = (goalId, progress) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET status = 3 WHERE id = ${goalId} AND ${progress} >= amount`;
+      const queryString = `UPDATE goals SET status = 3, complete_date = CURRENT_DATE WHERE id = ${goalId} AND ${progress} >= amount`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating goal status to completed', error);

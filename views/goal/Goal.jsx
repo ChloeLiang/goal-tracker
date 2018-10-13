@@ -25,6 +25,8 @@ class Goal extends React.Component {
 
     const target = Math.ceil(goal.amount / diff * multiplier);
 
+    //TODO: Lock the progress bar if task is completed.
+    //TODO: Hide add button if goal is completed.
     let secondBarStyle, firstBarWidth, secondBarWidth;
     const barStyle = 'progress-bar';
     if (target === progress) {
@@ -75,7 +77,9 @@ class Goal extends React.Component {
               {progressPercentage}
             </div>
             <div className="col">
-              <button type="button" className="btn btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}><i className="fas fa-plus"></i></button>
+              <button type="button" className="btn btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}>
+                <i className="fas fa-plus"></i>
+              </button>
               <div className="modal fade" id="newProgressModal" tabIndex="-1" role="dialog" aria-labelledby="newProgressModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">

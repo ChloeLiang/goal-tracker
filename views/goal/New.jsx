@@ -1,7 +1,7 @@
 const React = require('react');
 const moment = require('moment');
 
-class Modal extends React.Component {
+class New extends React.Component {
   render() {
     const now = moment().format('YYYY-MM-DD');
     const thirtyDaysLater = moment().add(30, 'days').format('YYYY-MM-DD');
@@ -20,6 +20,10 @@ class Modal extends React.Component {
               <form action="/goals" method="POST">
                 <div className="container-fluid">
                   <div className="row">
+                    <div className="col-12 text-center">
+                      <p className="my-0">Achieve your goal by dividing in a set of time</p>
+                      <small>Ex: Solve 50 coding interview questions in a month</small>
+                    </div>
                     <div className="col-12">
                       <div className="form-group">
                         <label htmlFor="title" className="col-form-label">Title</label>
@@ -65,4 +69,4 @@ class Modal extends React.Component {
   }
 }
 
-module.exports = Modal;
+module.exports = New;
