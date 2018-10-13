@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS goals (
   end_date DATE,
   status INTEGER,
   complete_date DATE,
-  image TEXT,
+  cover TEXT,
   user_id INTEGER
 );
 

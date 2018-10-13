@@ -24,8 +24,8 @@ module.exports = (app, db, isAuthenticated, upload) => {
    */
 
   app.get('/goals', goals.index);
-  app.put('/goals/:id', goals.update);
-  app.post('/goals', goals.create);
+  app.put('/goals/:id', upload.single('cover'), goals.update);
+  app.post('/goals', upload.single('cover'), goals.create);
   app.delete('/goals/:id', goals.destroy);
 
   /*

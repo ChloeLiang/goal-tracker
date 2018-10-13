@@ -1,13 +1,13 @@
 const moment = require('moment');
 
 module.exports = (pool) => {
-  const create = (goal, userId) => {
+  const create = (goal, cover, userId) => {
     return new Promise((resolve, reject) => {
       let status = 2;
       if (moment().isBefore(goal.start_date)) {
         status = 0;
       }
-      const queryString = `INSERT INTO goals (title, amount, unit, start_date, end_date, status, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+      const queryString = `INSERT INTO goals (title, amount, unit, start_date, end_date, status, user_id, cover) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
       const values = [
         goal.title,
         goal.amount,
@@ -15,7 +15,8 @@ module.exports = (pool) => {
         goal.start_date,
         goal.end_date,
         status,
-        userId
+        userId,
+        cover
       ];
 
       pool.query(queryString, values, (error, queryResult) => {

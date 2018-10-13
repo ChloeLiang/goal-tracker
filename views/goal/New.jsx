@@ -17,7 +17,7 @@ class New extends React.Component {
               </button>
             </div>
             <div className="modal-body">
-              <form action="/goals" method="POST">
+              <form action="/goals" method="POST" encType="multipart/form-data">
                 <div className="container-fluid">
                   <div className="row">
                     <div className="col-12 text-center">
@@ -29,6 +29,10 @@ class New extends React.Component {
                         <label htmlFor="title" className="col-form-label">Title</label>
                         <input type="text" className="form-control" name="title" id="title" placeholder="Ex: Solve 100 coding interview questions" required />
                       </div>
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="cover">Cover photo (optional)</label>
+                      <input type="file" className="form-control-file" id="cover" name="cover" accept="image/*" />
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
