@@ -50,7 +50,7 @@ class Index extends React.Component {
 
       completedList = completed.map(goal => {
         return (
-          <div key={goal.id} className="col-sm-6 col-md-12 my-3">
+          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
             <Goal goal={goal} />
           </div>
         );

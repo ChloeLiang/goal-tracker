@@ -1,12 +1,17 @@
 #main {
-  max-width: 1000px;
+  max-width: 1200px;
   height: 100vh;
   margin: 0 auto;
   overflow-y: auto;
-  padding-top: 60px;
+  padding: 60px 0;
 }
 
-.btn--nav {
+.btn-add-nav {
+
+  display: none;
+}
+
+.btn-add-round {
   position: fixed;
   bottom: 0;
   right: 0;
@@ -27,12 +32,21 @@
 }
 
 @media (min-width: 992px) {
+  .btn-add-round {
+    display: none;
+  }
+
+  .btn-add-nav {
+    display: inline-block;
+  }
+
   .nav-goal {
     display: none;
   }
 
   #main {
     display: flex;
+    padding-bottom: 0;
   }
 
   #upcoming,

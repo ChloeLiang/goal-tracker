@@ -145,7 +145,7 @@ class Goal extends React.Component {
               </span>
             </div>
             <div className="col d-flex justify-content-center align-items-center">
-              <button type="button" className="btn btn-lg btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}>
+              <button type="button" className="btn btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}>
                 <i className="fas fa-pencil-alt"></i>
               </button>
               <div className="modal fade" id="newProgressModal" tabIndex="-1" role="dialog" aria-labelledby="newProgressModalLabel" aria-hidden="true">

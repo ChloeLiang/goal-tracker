@@ -52,6 +52,9 @@ class TopNav extends React.Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-center ml-auto">
+            <li className="nav-item">
+              <button type="button" className="btn btn-outline-primary btn-add-nav mr-3" data-toggle="modal" data-target="#newGoalModal"><i className="fas fa-plus"></i> New Goal</button>
+            </li>
             {nav}
             {register}
             {login}
@@ -59,7 +62,7 @@ class TopNav extends React.Component {
             {logout}
           </ul>
         </div>
-        <button type="button" className="btn btn-primary btn-lg btn--nav" data-toggle="modal" data-target="#newGoalModal">+</button>
+        <button type="button" className="btn btn-primary btn-lg btn-add-round" data-toggle="modal" data-target="#newGoalModal"><i className="fas fa-plus"></i></button>
       </nav>
     );
   }
