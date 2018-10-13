@@ -34,7 +34,8 @@ module.exports = (db, isAuthenticated, upload) => {
 
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.goal.create(request.body, request.file.filename, request.cookies.userId)
+      const cover = request.file ? request.file.filename : null;
+      db.goal.create(request.body, cover, request.cookies.userId)
         .then(queryResult => {
           response.redirect('/goals');
         })

@@ -4,6 +4,12 @@ const moment = require('moment');
 class Goal extends React.Component {
   render() {
     const goal = this.props.goal;
+
+    let cover;
+    if (goal.cover) {
+      cover = <img className="card-img-top" src={`/uploads/${goal.cover}`} alt="cover image"></img>;
+    }
+
     let progress = goal.progress || 0;
 
     if (progress > goal.amount) {
@@ -135,7 +141,7 @@ class Goal extends React.Component {
             </div>
           </div>
         </div>
-        <img className="card-img-top" src={`/uploads/${goal.cover}`} alt="cover image"></img>
+        {cover}
         <div className="card-body">
           <h5 className="card-title">{goal.title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">Due: {moment(goal.end_date).format('YYYY-MM-DD')}</h6>
