@@ -7,7 +7,7 @@ class Goal extends React.Component {
 
     let cover;
     if (goal.cover) {
-      cover = <img className="card-img-top" src={`/uploads/${goal.cover}`} alt="cover image"></img>;
+      cover = <img className="card-img-top mt-3" src={goal.cover} alt="cover image"></img>;
     }
 
     let progress = goal.progress || 0;
@@ -33,6 +33,7 @@ class Goal extends React.Component {
 
     //TODO: Lock the progress bar if task is completed.
     //TODO: Hide add button if goal is completed.
+    //TODO: Add a new + button
     let secondBarStyle, firstBarWidth, secondBarWidth;
     const barStyle = 'progress-bar';
     if (target === progress) {
@@ -53,8 +54,8 @@ class Goal extends React.Component {
     const progressPercentage = Math.floor(progress / goal.amount * 100) + '%';
     const targetPercentage = Math.floor(target / goal.amount * 100) + '%';
 
-    let cardStyle = 'card shadow text-center';
-    let cardHeaderStyle = 'card-header text-right';
+    let cardStyle = 'card shadow';
+    let cardHeaderStyle = 'card-header text-right py-1';
 
     // status: upcoming = 0, overdue = 1, ongoing = 2, completed = 3
     if (goal.status === 0) {
@@ -143,8 +144,8 @@ class Goal extends React.Component {
         </div>
         {cover}
         <div className="card-body">
-          <h5 className="card-title">{goal.title}</h5>
-          <h6 className="card-subtitle mb-2 text-muted">Due: {moment(goal.end_date).format('YYYY-MM-DD')}</h6>
+          <p className="mb-0 text-left">{goal.title}</p>
+          <small className="card-subtitle text-muted">Due: {moment(goal.end_date).format('YYYY-MM-DD')}</small>
           <div className="row my-3">
             <div className="col d-flex justify-content-center align-items-center">
               <span className="h5">

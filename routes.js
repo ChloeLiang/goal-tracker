@@ -1,8 +1,8 @@
-module.exports = (app, db, isAuthenticated, upload) => {
+module.exports = (app, db, isAuthenticated, upload, cloudinary) => {
 
-  const users = require('./controllers/user')(db, upload);
-  const goals = require('./controllers/goal')(db, isAuthenticated, upload);
-  const progress = require('./controllers/progress')(db, isAuthenticated, upload);
+  const users = require('./controllers/user')(db);
+  const goals = require('./controllers/goal')(db, isAuthenticated, cloudinary);
+  const progress = require('./controllers/progress')(db, isAuthenticated);
 
   /*
    *  =========================================
@@ -24,7 +24,7 @@ module.exports = (app, db, isAuthenticated, upload) => {
    */
 
   app.get('/goals', goals.index);
-  app.put('/goals/:id', upload.single('cover'), goals.update);
+  app.put('/goals/:id', goals.update);
   app.post('/goals', upload.single('cover'), goals.create);
   app.delete('/goals/:id', goals.destroy);
 

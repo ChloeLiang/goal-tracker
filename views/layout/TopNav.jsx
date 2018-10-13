@@ -45,7 +45,7 @@ class TopNav extends React.Component {
     }
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a className="navbar-brand" href="#">GoalTracker</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -53,7 +53,7 @@ class TopNav extends React.Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-center ml-auto">
             <li className="nav-item">
-              <button type="button" className="btn btn-outline-primary btn-add-nav mr-3" data-toggle="modal" data-target="#newGoalModal"><i className="fas fa-plus"></i> New Goal</button>
+              <button type="button" className="btn btn-outline-primary text-light btn-add-nav mr-3" data-toggle="modal" data-target="#newGoalModal"><i className="fas fa-plus"></i> New Goal</button>
             </li>
             {nav}
             {register}

@@ -1,4 +1,4 @@
-module.exports = (db, isAuthenticated, upload) => {
+module.exports = (db, isAuthenticated, cloudinary) => {
   // status: upcoming = 0, overdue = 1, ongoing = 2, completed = 3
   const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
@@ -34,15 +34,29 @@ module.exports = (db, isAuthenticated, upload) => {
 
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      const cover = request.file ? request.file.filename : null;
-      db.goal.create(request.body, cover, request.cookies.userId)
-        .then(queryResult => {
-          response.redirect('/goals');
-        })
-        .catch(error => {
-          console.log(error);
-          response.sendStatus(500);
-        });
+      if (request.file) {
+        cloudinary.v2.uploader.upload(`public/uploads/${request.file.filename}`,
+          { width: 'auto', height: 150, crop: 'fit' },
+          (error, result) => {
+            db.goal.create(request.body, result.url, request.cookies.userId)
+              .then(queryResult => {
+                response.redirect('/goals');
+              })
+              .catch(error => {
+                console.log(error);
+                response.sendStatus(500);
+              });
+          });
+      } else {
+        db.goal.create(request.body, null, request.cookies.userId)
+          .then(queryResult => {
+            response.redirect('/goals');
+          })
+          .catch(error => {
+            console.log(error);
+            response.sendStatus(500);
+          });
+      }
     } else {
       response.redirect('/');
     }

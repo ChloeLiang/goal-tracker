@@ -3,6 +3,7 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const db = require('./db');
 const multer = require('multer');
+const cloudinary = require('cloudinary');
 const sha256 = require('js-sha256');
 const SALT = 'fQdkaUjfieowavwEivorutyFvdaljfLoewKdkfj';
 
@@ -27,6 +28,12 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', reactEngine);
 
+cloudinary.config({
+  cloud_name: 'nliangxin',
+  api_key: '529894273248595',
+  api_secret: 'yd5Clv37vQXIixv6N27GpvS5310'
+});
+
 const isAuthenticated = (cookie) => {
   const userId = cookie.userId;
   const hashedValue = sha256(userId + 'loggedIn' + SALT);
@@ -43,7 +50,7 @@ const isAuthenticated = (cookie) => {
  * ===================================
  */
 
-require('./routes')(app, db, isAuthenticated, upload);
+require('./routes')(app, db, isAuthenticated, upload, cloudinary);
 
 app.get('/', (request, response) => {
   if (isAuthenticated(request.cookies)) {
