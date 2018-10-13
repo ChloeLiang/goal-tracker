@@ -78,14 +78,14 @@ class Index extends React.Component {
 
     return (
       <Navigation username={this.props.username}>
-        <div id="main" className="container-fluid my-5 py-3">
+        <div id="main" className="container-fluid">
           <div id="ongoing" className="container-fluid my-3">
             <div className="row text-center mb-3">
               <div className="col">
                 <h6>Ongoing</h6>
               </div>
             </div>
-            <div className="row container-goal mb-5">
+            <div className="row container-goal">
               {overdueList}
               {ongoingList}
             </div>
@@ -97,7 +97,7 @@ class Index extends React.Component {
                 <h6>Upcoming</h6>
               </div>
             </div>
-            <div className="row container-goal mb-5">
+            <div className="row container-goal">
               {upcomingList}
             </div>
           </div>
@@ -108,7 +108,7 @@ class Index extends React.Component {
                 <h6>Completed</h6>
               </div>
             </div>
-            <div className="row container-goal mb-5">
+            <div className="row container-goal">
               {completedList}
             </div>
           </div>
