@@ -48,15 +48,20 @@ class Progress extends React.Component {
     const progressPercentage = Math.floor(progress / goal.amount * 100) + '%';
     const targetPercentage = Math.floor(target / goal.amount * 100) + '%';
 
-    let display;
+    let display, date;
     if (goal.status === 3) {
       display = 'd-none';
+      date = <small className="card-subtitle text-white bg-success rounded p-1">{moment(goal.complete_date).format('YYYY-MM-DD')}</small>;
+    } else if (goal.status === 1) {
+      date = <small className="card-subtitle text-white bg-danger rounded p-1">{moment(goal.end_date).format('YYYY-MM-DD')}</small>;
+    } else {
+      date = <small className="card-subtitle text-muted">{moment(goal.end_date).format('YYYY-MM-DD')}</small>;
     }
 
     return (
       <div className='card-body'>
         <p className="mb-0 text-left">{goal.title}</p>
-        <small className="card-subtitle text-muted">Due: {moment(goal.end_date).format('YYYY-MM-DD')}</small>
+        {date}
         <div className={`row my-3 ${display}`}>
           <div className="col d-flex justify-content-center align-items-center">
             <span className="h5">
