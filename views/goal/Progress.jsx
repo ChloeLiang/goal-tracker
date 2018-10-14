@@ -1,5 +1,6 @@
 const React = require('react');
 const moment = require('moment');
+const UpdateModal = require('../progress/UpdateModal');
 
 class Progress extends React.Component {
   render() {
@@ -74,33 +75,7 @@ class Progress extends React.Component {
               <button type="button" className="btn btn-sm btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}>
                 <i className="fas fa-pencil-alt"></i>
               </button>
-              <div className="modal fade" id="newProgressModal" tabIndex="-1" role="dialog" aria-labelledby="newProgressModalLabel" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="newProgressModalLabel">Update Progress</h5>
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      <form action="/progress" method="POST">
-                        <div className="container">
-                          <div className="form-group">
-                            <label htmlFor="progress_amount" className="col-form-label">Amount achieved</label>
-                            <input type="number" className="form-control" name="amount" id="progress_amount" placeholder="Ex: 10" required />
-                          </div>
-                        </div>
-                        <div className="modal-footer">
-                          <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" className="modal-goalid" name="goal_id" />
-                          <input type="submit" className="btn btn-primary" value="Update" />
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <UpdateModal />
             </div>
           </div>
         </div>
