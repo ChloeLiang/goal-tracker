@@ -1,6 +1,7 @@
 const React = require('react');
 const moment = require('moment');
 const UpdateModal = require('../progress/UpdateModal');
+const AddModal = require('../progress/AddModal');
 
 class Progress extends React.Component {
   render() {
@@ -26,9 +27,6 @@ class Progress extends React.Component {
 
     const target = Math.ceil(goal.amount / diff * multiplier);
 
-    //TODO: Lock the progress bar if task is completed.
-    //TODO: Hide add button if goal is completed.
-    //TODO: Add a new + button
     let secondBarStyle, firstBarWidth, secondBarWidth;
     const barStyle = 'progress-bar';
     if (target === progress) {
@@ -72,8 +70,13 @@ class Progress extends React.Component {
             </div>
 
             <div className="d-flex">
-              <button type="button" className="btn btn-sm btn-outline-primary rounded-circle" data-toggle="modal" data-target="#newProgressModal" data-goalid={goal.id}>
+              <button type="button" className="btn btn-sm btn-outline-primary rounded-circle" data-toggle="modal" data-target="#updateProgressModal" data-goalid={goal.id} data-type="update">
                 <i className="fas fa-pencil-alt"></i>
+              </button>
+              <UpdateModal />
+
+              <button type="button" className="btn btn-sm btn-outline-primary rounded-circle ml-1" data-toggle="modal" data-target="#addProgressModal" data-goalid={goal.id} data-type="add">
+                <i className="fas fa-plus"></i>
               </button>
               <UpdateModal />
             </div>

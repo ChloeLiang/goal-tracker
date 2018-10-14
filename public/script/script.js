@@ -10,11 +10,21 @@ $(document).ready(function () {
     });
   });
 
-  $('#newProgressModal').on('show.bs.modal', function (event) {
+  $('#updateProgressModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var goalId = button.data('goalid');
+    var type = button.data('type');
+    var modal = $(this);
+    modal.find('.modal-goalid').val(goalId);
+    modal.find('.modal-type').val(type);
+  });
+
+  $('#addProgressModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var goalId = button.data('goalid');
     var modal = $(this);
     modal.find('.modal-goalid').val(goalId);
+    modal.find('.modal-type').val(type);
   });
 
   $('#editGoalModal').on('show.bs.modal', function (event) {

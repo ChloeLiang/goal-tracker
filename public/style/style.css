@@ -80,7 +80,7 @@ button i {
   }
 
   .container-goal {
-    height: 90%;
+    max-height: 90%;
     overflow-y: scroll;
   }
 

@@ -4,8 +4,17 @@ module.exports = (db, isAuthenticated) => {
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       const goalId = request.body.goal_id;
+      const type = request.body.type;
       const progress = parseInt(request.body.amount, 10);
-      db.goal.updateProgress(goalId, progress)
+
+      let trackProgress;
+      if (type === 'update') {
+        trackProgress = db.goal.updateProgress;
+      } else if (type === 'add') {
+        trackProgress = db.goal.addProgress;
+      }
+
+      trackProgress(goalId, progress)
         .then(queryResult => {
           return db.progress.get(goalId);
         })

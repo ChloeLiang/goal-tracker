@@ -1,13 +1,13 @@
 const React = require('react');
 
-class UpdateModal extends React.Component {
+class AddModal extends React.Component {
   render() {
     return (
-      <div className="modal fade" id="updateProgressModal" tabIndex="-1" role="dialog" aria-labelledby="updateProgressModalLabel" aria-hidden="true">
+      <div className="modal fade" id="addProgressModal" tabIndex="-1" role="dialog" aria-labelledby="addProgressModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="updateProgressModalLabel">Update Progress</h5>
+              <h5 className="modal-title" id="addProgressModalLabel">Update Progress</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -35,4 +35,4 @@ class UpdateModal extends React.Component {
   }
 }
 
-module.exports = UpdateModal;
+module.exports = AddModal;
