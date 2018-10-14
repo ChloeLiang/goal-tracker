@@ -2,6 +2,22 @@ body {
   background: rgba(240, 236, 236, 0.5);
 }
 
+button i {
+  font-size: 14px;
+}
+
+.container-goal::-webkit-scrollbar {
+  width: .2rem;
+}
+
+.container-goal::-webkit-scrollbar-thumb {
+  background-color: rgb(206, 206, 206);
+}
+
+.progress {
+  height: 5px;
+}
+
 #main {
   max-width: 1100px;
   height: 100vh;

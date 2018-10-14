@@ -32,7 +32,7 @@ module.exports = (pool) => {
 
   const index = (userId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT * FROM goals WHERE user_id = ${userId}`;
+      const queryString = `SELECT * FROM goals WHERE user_id = ${userId} ORDER BY end_date`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error getting goals', error);

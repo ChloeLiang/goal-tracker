@@ -14,7 +14,7 @@ class Index extends React.Component {
 
       ongoingList = ongoing.map(goal => {
         return (
-          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
+          <div key={goal.id} className="col-sm-6 col-lg-12 mb-3">
             <Goal goal={goal} />
           </div>
         );
@@ -26,7 +26,7 @@ class Index extends React.Component {
 
       overdueList = overdue.map(goal => {
         return (
-          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
+          <div key={goal.id} className="col-sm-6 col-lg-12 mb-3">
             <Goal goal={goal} />
           </div>
         );
@@ -38,7 +38,7 @@ class Index extends React.Component {
 
       upcomingList = upcoming.map(goal => {
         return (
-          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
+          <div key={goal.id} className="col-sm-6 col-lg-12 mb-3">
             <Goal goal={goal} />
           </div>
         );
@@ -50,7 +50,7 @@ class Index extends React.Component {
 
       completedList = completed.map(goal => {
         return (
-          <div key={goal.id} className="col-sm-6 col-lg-12 my-3">
+          <div key={goal.id} className="col-sm-6 col-lg-12 mb-3">
             <Goal goal={goal} />
           </div>
         );

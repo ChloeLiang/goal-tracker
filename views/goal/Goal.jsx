@@ -13,26 +13,8 @@ class Goal extends React.Component {
       cover = <img className="card-img-top mt-3" src={goal.cover} alt="cover image"></img>;
     }
 
-    let cardStyle = 'card shadow';
-    let cardHeaderStyle = 'card-header text-right py-1';
-
-    // status: upcoming = 0, overdue = 1, ongoing = 2, completed = 3
-    if (goal.status === 0) {
-      cardStyle = `${cardStyle} border-secondary`;
-      cardHeaderStyle = `${cardHeaderStyle} bg-secondary`;
-    } else if (goal.status === 2) {
-      cardStyle = `${cardStyle} border-warning`;
-      cardHeaderStyle = `${cardHeaderStyle} bg-warning`;
-    } else if (goal.status === 3) {
-      cardStyle = `${cardStyle} border-success`;
-      cardHeaderStyle = `${cardHeaderStyle} bg-success`;
-    } else if (goal.status === 1) {
-      cardStyle = `${cardStyle} border-danger`;
-      cardHeaderStyle = `${cardHeaderStyle} bg-danger`;
-    }
-
     return (
-      <div className={cardStyle}>
+      <div className="card shadow-sm border-secondary">
         <div className="modal fade" id="editGoalModal" tabIndex="-1" role="dialog" aria-labelledby="editGoalModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -88,7 +70,7 @@ class Goal extends React.Component {
           </div>
         </div>
 
-        <div className={cardHeaderStyle}>
+        <div className="card-header text-right py-1 bg-light">
           <div className="dropdown">
             <button className="btn bg-transparent dropdown-toggle py-0" type="button" id="dropdownGoalMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i className="fas fa-ellipsis-h"></i>
