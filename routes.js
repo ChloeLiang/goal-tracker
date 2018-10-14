@@ -23,6 +23,7 @@ module.exports = (app, db, isAuthenticated, upload, cloudinary) => {
    *  =========================================
    */
 
+  app.get('/goals/:id', goals.show);
   app.get('/goals', goals.index);
   app.put('/goals/:id', goals.update);
   app.post('/goals', upload.single('cover'), goals.create);
@@ -34,6 +35,6 @@ module.exports = (app, db, isAuthenticated, upload, cloudinary) => {
    *  =========================================
    */
 
-  app.get('/progress', progress.get);
+  app.get('/progress/:goalId', progress.index);
   app.post('/progress', progress.create);
 };

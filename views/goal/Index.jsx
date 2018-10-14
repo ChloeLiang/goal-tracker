@@ -78,7 +78,7 @@ class Index extends React.Component {
 
     return (
       <Navigation username={this.props.username}>
-        <div id="main" className="container-fluid">
+        <div className="container-fluid main">
           <div id="ongoing" className="container-fluid my-3">
             <div className="row text-center mb-3">
               <div className="col">

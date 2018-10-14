@@ -32,6 +32,21 @@ module.exports = (db, isAuthenticated, cloudinary) => {
     }
   };
 
+  const show = (request, response) => {
+    if (isAuthenticated(request.cookies)) {
+      const username = request.cookies.username;
+      const goalId = request.params.id;
+      db.goal.get(goalId)
+        .then(queryResult => {
+          response.render('goal/Show', { username, goal: queryResult });
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        });
+    }
+  };
+
   const create = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       if (request.file) {
@@ -111,6 +126,7 @@ module.exports = (db, isAuthenticated, cloudinary) => {
 
   return {
     index,
+    show,
     create,
     editForm,
     update,

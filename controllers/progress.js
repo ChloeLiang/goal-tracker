@@ -43,21 +43,21 @@ module.exports = (db, isAuthenticated) => {
     }
   };
 
-  const get = (request, response) => {
+  const index = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.progress.getTotal()
+      db.progress.index(request.params.goalId)
         .then(queryResult => {
-          response.json(queryResult);
+          response.json({ progress: queryResult });
         })
         .catch(error => {
           console.log(error);
           response.sendStatus(500);
         });
     }
-  }
+  };
 
   return {
     create,
-    get,
+    index
   };
 };
