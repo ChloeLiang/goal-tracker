@@ -36,9 +36,15 @@ module.exports = (db, isAuthenticated, cloudinary) => {
     if (isAuthenticated(request.cookies)) {
       const username = request.cookies.username;
       const goalId = request.params.id;
+      const data = { username };
       db.goal.get(goalId)
         .then(queryResult => {
-          response.render('goal/Show', { username, goal: queryResult });
+          data.goal = queryResult;
+          return db.progress.index(goalId);
+        })
+        .then(queryResult => {
+          data.progress = queryResult;
+          response.render('goal/Show', data);
         })
         .catch(error => {
           console.log(error);

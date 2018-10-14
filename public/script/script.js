@@ -1,12 +1,4 @@
 $(document).ready(function () {
-  var request = new XMLHttpRequest();
-  request.addEventListener('load', function () {
-    console.log(this.responseText);
-  });
-
-  request.open('GET', '/progress/1');
-  request.send();
-
   $('[data-toggle="tooltip"]').tooltip();
 
   $('#newGoalModal').on('show.bs.modal', function (event) {

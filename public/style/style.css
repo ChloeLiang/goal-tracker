@@ -26,6 +26,10 @@ button i {
   padding: 60px 0;
 }
 
+.detail {
+  padding: 60px 0;
+}
+
 .card-img-top {
   height: 150px;
   object-fit: contain;

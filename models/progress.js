@@ -20,7 +20,7 @@ module.exports = (pool) => {
 
   const index = (goalId) => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT * FROM progress WHERE goal_id = ${goalId}`;
+      const queryString = `SELECT * FROM progress WHERE goal_id = ${goalId} ORDER BY created_at`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error getting a progress', error);

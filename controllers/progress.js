@@ -7,7 +7,7 @@ module.exports = (db, isAuthenticated) => {
       const type = request.body.type;
       const progress = parseInt(request.body.amount, 10);
 
-      let trackGoal
+      let trackGoal;
       let trackProgress;
       if (type === 'update') {
         trackGoal = db.goal.updateProgress;
