@@ -144,6 +144,19 @@ module.exports = (pool) => {
     });
   };
 
+  const addProgress = (goalId, progress) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE goals SET progress = progress + ${progress} WHERE id = ${goalId}`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error adding goal progress', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
   const destroy = (goalId) => {
     return new Promise((resolve, reject) => {
       const queryString = `DELETE from goals WHERE id = ${goalId}`;
@@ -167,6 +180,7 @@ module.exports = (pool) => {
     updateCompleted,
     updateOverdue,
     updateProgress,
+    addProgress,
     destroy
   };
 };

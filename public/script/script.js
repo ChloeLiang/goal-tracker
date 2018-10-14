@@ -22,6 +22,7 @@ $(document).ready(function () {
   $('#addProgressModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var goalId = button.data('goalid');
+    var type = button.data('type');
     var modal = $(this);
     modal.find('.modal-goalid').val(goalId);
     modal.find('.modal-type').val(type);

@@ -7,26 +7,29 @@ module.exports = (db, isAuthenticated) => {
       const type = request.body.type;
       const progress = parseInt(request.body.amount, 10);
 
+      let trackGoal
       let trackProgress;
       if (type === 'update') {
-        trackProgress = db.goal.updateProgress;
+        trackGoal = db.goal.updateProgress;
+        trackProgress = db.progress.update;
       } else if (type === 'add') {
-        trackProgress = db.goal.addProgress;
+        trackGoal = db.goal.addProgress;
+        trackProgress = db.progress.add;
       }
 
-      trackProgress(goalId, progress)
+      trackGoal(goalId, progress)
         .then(queryResult => {
           return db.progress.get(goalId);
         })
         .then(queryResult => {
           if (queryResult) {
-            return db.progress.update(goalId, progress);
+            return trackProgress(goalId, progress);
           }
 
           return db.progress.create(goalId, progress);
         })
         .then(queryResult => {
-          return db.goal.updateCompleted(goalId, progress);
+          return db.goal.updateCompleted(goalId);
         })
         .then(queryResult => {
           response.redirect('/goals');

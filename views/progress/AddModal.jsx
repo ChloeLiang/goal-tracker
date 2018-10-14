@@ -7,7 +7,7 @@ class AddModal extends React.Component {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="addProgressModalLabel">Update Progress</h5>
+              <h5 className="modal-title" id="addProgressModalLabel">Add Progress</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -24,7 +24,7 @@ class AddModal extends React.Component {
                   <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                   <input type="hidden" className="modal-goalid" name="goal_id" />
                   <input type="hidden" className="modal-type" name="type" />
-                  <input type="submit" className="btn btn-primary" value="Update" />
+                  <input type="submit" className="btn btn-primary" value="Add" />
                 </div>
               </form>
             </div>

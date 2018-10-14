@@ -2,7 +2,7 @@ module.exports = (pool) => {
 
   const create = (goalId, amount) => {
     return new Promise((resolve, reject) => {
-      const queryString = `INSERT INTO progress (amount, goal_id) VALUES ($1, $2)`;
+      const queryString = `INSERT INTO progress (amount, goal_id) VALUES ($1, $2) RETURNING *`;
       const values = [
         amount,
         goalId
@@ -12,7 +12,7 @@ module.exports = (pool) => {
         if (error) {
           reject('error creating progress', error);
         } else {
-          resolve(queryResult);
+          resolve(queryResult.rows[0]);
         }
       });
     });
@@ -48,10 +48,23 @@ module.exports = (pool) => {
 
   const update = (goalId, amount) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE progress SET amount = ${amount} WHERE goal_id = ${goalId} AND created_at = CURRENT_DATE`;
+      const queryString = `UPDATE progress SET amount = ${amount} WHERE goal_id = ${goalId} AND created_at = CURRENT_DATE RETURNING *`;
       pool.query(queryString, (error, queryResult) => {
         if (error) {
           reject('error updating progress for today', error);
+        } else {
+          resolve(queryResult.rows[0]);
+        }
+      });
+    });
+  };
+
+  const add = (goalId, amount) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE progress SET amount = amount + ${amount} WHERE goal_id = ${goalId} AND created_at = CURRENT_DATE RETURNING *`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error adding progress for today', error);
         } else {
           resolve(queryResult.rows[0]);
         }
@@ -77,6 +90,7 @@ module.exports = (pool) => {
     index,
     get,
     update,
+    add,
     destroy
   };
 };

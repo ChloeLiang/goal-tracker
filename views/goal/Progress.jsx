@@ -78,7 +78,7 @@ class Progress extends React.Component {
               <button type="button" className="btn btn-sm btn-outline-primary rounded-circle ml-1" data-toggle="modal" data-target="#addProgressModal" data-goalid={goal.id} data-type="add">
                 <i className="fas fa-plus"></i>
               </button>
-              <UpdateModal />
+              <AddModal />
             </div>
           </div>
         </div>
