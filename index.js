@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
@@ -29,9 +30,9 @@ app.set('view engine', 'jsx');
 app.engine('jsx', reactEngine);
 
 cloudinary.config({
-  cloud_name: 'nliangxin',
-  api_key: '529894273248595',
-  api_secret: 'yd5Clv37vQXIixv6N27GpvS5310'
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 const isAuthenticated = (cookie) => {
