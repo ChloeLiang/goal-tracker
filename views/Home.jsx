@@ -1,6 +1,5 @@
 const React = require('react');
 const Navigation = require('./layout/Navigation');
-//TODO: Design home page
 class Home extends React.Component {
   render() {
     return (
