@@ -2,7 +2,7 @@ const React = require('react');
 
 class TopNav extends React.Component {
   render() {
-    let register, login, logout, user, nav;
+    let register, login, logout, user, nav, addGoal;
 
     if (this.props.username) {
       user = (
@@ -30,6 +30,12 @@ class TopNav extends React.Component {
           </li>
         </React.Fragment>
       );
+
+      addGoal = (
+        <li className="nav-item">
+          <button type="button" className="btn btn-outline-primary text-light btn-add-nav mr-3" data-toggle="modal" data-target="#newGoalModal"><i className="fas fa-plus"></i> New Goal</button>
+        </li>
+      );
     } else {
       register = (
         <li className="nav-item">
@@ -52,9 +58,7 @@ class TopNav extends React.Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav text-center ml-auto">
-            <li className="nav-item">
-              <button type="button" className="btn btn-outline-primary text-light btn-add-nav mr-3" data-toggle="modal" data-target="#newGoalModal"><i className="fas fa-plus"></i> New Goal</button>
-            </li>
+            {addGoal}
             {nav}
             {register}
             {login}
