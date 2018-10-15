@@ -100,14 +100,31 @@ module.exports = (db, isAuthenticated, cloudinary) => {
 
   const update = (request, response) => {
     if (isAuthenticated(request.cookies)) {
-      db.goal.update(request.params.id, request.body)
-        .then(queryResult => {
-          response.redirect('/goals');
-        })
-        .catch(error => {
-          console.log(error);
-          response.sendStatus(500);
-        });
+      if (request.file) {
+        cloudinary.v2.uploader.upload(`public/uploads/${request.file.filename}`,
+          { width: 'auto', height: 150, crop: 'fit' },
+          (error, result) => {
+            request.body.cover = result.url;
+            db.goal.update(request.params.id, request.body)
+              .then(queryResult => {
+                response.redirect('/goals');
+              })
+              .catch(error => {
+                console.log(error);
+                response.sendStatus(500);
+              });
+          });
+      } else {
+        request.body.cover = request.body.currentCover;
+        db.goal.update(request.params.id, request.body)
+          .then(queryResult => {
+            response.redirect('/goals');
+          })
+          .catch(error => {
+            console.log(error);
+            response.sendStatus(500);
+          });
+      }
     } else {
       response.redirect('/');
     }

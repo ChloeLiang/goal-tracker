@@ -34,6 +34,7 @@ $(document).ready(function () {
     var unit = button.data('unit');
     var start = button.data('start');
     var end = button.data('end');
+    var cover = button.data('currentcover');
     var modal = $(this);
 
     modal.find('.modal-form').attr('action', `/goals/${goalId}?_method=PUT`);
@@ -44,6 +45,7 @@ $(document).ready(function () {
     modal.find('.modal-start').attr('min', start);
     modal.find('.modal-end').attr('value', end);
     modal.find('.modal-end').attr('min', start);
+    modal.find('.modal-cover').attr('value', cover);
 
     modal.find('.modal-start').on('change', function (event) {
       modal.find('.modal-end').attr('min', event.target.value);

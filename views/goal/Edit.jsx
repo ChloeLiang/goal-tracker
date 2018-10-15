@@ -13,14 +13,19 @@ class Edit extends React.Component {
               </button>
             </div>
             <div className="modal-body">
-              <form className="modal-form" method="POST">
+              <form className="modal-form" method="POST" encType="multipart/form-data">
                 <div className="container-fluid">
+                  <input type="hidden" className="modal-cover" name="currentCover" />
                   <div className="row">
                     <div className="col-12">
                       <div className="form-group">
                         <label htmlFor="title" className="col-form-label">Title</label>
                         <input type="text" className="form-control modal-title" name="title" id="title" placeholder="Ex: Solve 100 coding interview questions" required />
                       </div>
+                    </div>
+                    <div className="col-7">
+                      <label htmlFor="coverEdit">Cover photo (optional)</label>
+                      <input type="file" className="form-control-file" id="coverEdit" name="cover" accept="image/*" />
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">

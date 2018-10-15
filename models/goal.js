@@ -60,13 +60,14 @@ module.exports = (pool) => {
 
   const update = (goalId, goal) => {
     return new Promise((resolve, reject) => {
-      const queryString = `UPDATE goals SET title = ($1), amount = ($2), unit = ($3), start_date = ($4), end_date = ($5) WHERE id = ${goalId}`;
+      const queryString = `UPDATE goals SET title = ($1), amount = ($2), unit = ($3), start_date = ($4), end_date = ($5), cover = ($6) WHERE id = ${goalId}`;
       const values = [
         goal.title,
         goal.amount,
         goal.unit,
         goal.start_date,
-        goal.end_date
+        goal.end_date,
+        goal.cover
       ];
 
       pool.query(queryString, values, (error, queryResult) => {
