@@ -80,6 +80,19 @@ module.exports = (pool) => {
     });
   };
 
+  const updateCover = (goalId) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `UPDATE goals SET cover = NULL WHERE id = ${goalId}`;
+      pool.query(queryString, (error, queryResult) => {
+        if (error) {
+          reject('error removing cover', error);
+        } else {
+          resolve(queryResult);
+        }
+      });
+    });
+  };
+
   const updateUpcoming = (userId) => {
     return new Promise((resolve, reject) => {
       const queryString = `UPDATE goals SET status = 0, complete_date = NULL WHERE CURRENT_DATE < start_date AND progress < amount AND user_id = ${userId}`;
@@ -176,6 +189,7 @@ module.exports = (pool) => {
     index,
     get,
     update,
+    updateCover,
     updateUpcoming,
     updateOngoing,
     updateCompleted,

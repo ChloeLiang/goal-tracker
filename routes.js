@@ -25,6 +25,7 @@ module.exports = (app, db, isAuthenticated, upload, cloudinary) => {
 
   app.get('/goals/:id', goals.show);
   app.get('/goals', goals.index);
+  app.put('/goals/:id/cover', goals.updateCover);
   app.put('/goals/:id', upload.single('cover'), goals.update);
   app.post('/goals', upload.single('cover'), goals.create);
   app.delete('/goals/:id', goals.destroy);

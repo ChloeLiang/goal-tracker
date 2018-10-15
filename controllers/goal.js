@@ -130,6 +130,21 @@ module.exports = (db, isAuthenticated, cloudinary) => {
     }
   };
 
+  const updateCover = (request, response) => {
+    if (isAuthenticated(request.cookies)) {
+      db.goal.updateCover(request.params.id)
+        .then(queryResult => {
+          response.redirect('/goals');
+        })
+        .catch(error => {
+          console.log(error);
+          response.sendStatus(500);
+        })
+    } else {
+      response.redirect('/');
+    }
+  };
+
   const destroy = (request, response) => {
     if (isAuthenticated(request.cookies)) {
       const goalId = request.params.id;
@@ -153,6 +168,7 @@ module.exports = (db, isAuthenticated, cloudinary) => {
     create,
     editForm,
     update,
+    updateCover,
     destroy
   };
 };
