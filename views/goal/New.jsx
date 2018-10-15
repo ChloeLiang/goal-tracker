@@ -30,7 +30,7 @@ class New extends React.Component {
                         <input type="text" className="form-control" name="title" id="title" placeholder="Ex: Solve 100 coding interview questions" required />
                       </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-md-7">
                       <label htmlFor="cover">Cover photo (optional)</label>
                       <input type="file" className="form-control-file" id="cover" name="cover" accept="image/*" />
                     </div>

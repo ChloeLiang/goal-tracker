@@ -23,7 +23,7 @@ class Edit extends React.Component {
                         <input type="text" className="form-control modal-title" name="title" id="title" placeholder="Ex: Solve 100 coding interview questions" required />
                       </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-md-7">
                       <label htmlFor="coverEdit">Cover photo (optional)</label>
                       <input type="file" className="form-control-file" id="coverEdit" name="cover" accept="image/*" />
                     </div>
