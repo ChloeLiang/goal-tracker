@@ -5,7 +5,9 @@ class Home extends React.Component {
   render() {
     return (
       <Navigation username={this.props.username}>
-        <h1>Welcome to Goal Tracker</h1>
+        <div className="container-home">
+          <img className="hero-image" src="/img/home.jpeg" alt="Hero image" />
+        </div>
       </Navigation>
     );
   }

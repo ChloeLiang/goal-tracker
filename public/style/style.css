@@ -6,6 +6,17 @@ button i {
   font-size: 14px;
 }
 
+.container-home {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+}
+
 .container-goal::-webkit-scrollbar {
   width: .2rem;
 }
