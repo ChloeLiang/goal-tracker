@@ -8,6 +8,7 @@ class Goal extends React.Component {
     const goal = this.props.goal;
     const startDate = moment(goal.start_date, 'YYYY-MM-DD');
     const endDate = moment(goal.end_date, 'YYYY-MM-DD');
+    const now = moment().format('YYYY-MM-DD');
 
     let cover;
     if (goal.cover) {
@@ -25,7 +26,7 @@ class Goal extends React.Component {
             </button>
             <div className="dropdown-menu" aria-labelledby="dropdownGoalMenuButton">
               <a href={`/goals/${goal.id}`} className="dropdown-item">Detail</a>
-              <button type="button" className="btn dropdown-item" data-toggle="modal" data-target="#editGoalModal" data-goalid={goal.id} data-title={goal.title} data-amount={goal.amount} data-unit={goal.unit} data-start={startDate.format('YYYY-MM-DD')} data-end={endDate.format('YYYY-MM-DD')} data-currentcover={goal.cover}>Edit</button>
+              <button type="button" className="btn dropdown-item" data-toggle="modal" data-target="#editGoalModal" data-goalid={goal.id} data-title={goal.title} data-amount={goal.amount} data-unit={goal.unit} data-start={startDate.format('YYYY-MM-DD')} data-end={endDate.format('YYYY-MM-DD')} data-currentcover={goal.cover} data-now={now}>Edit</button>
               <form action={`/goals/${goal.id}/cover?_method=PUT`} method="POST">
                 <input type="submit" className="btn dropdown-item" value="Remove cover" />
               </form>

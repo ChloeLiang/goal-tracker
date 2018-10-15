@@ -34,6 +34,7 @@ $(document).ready(function () {
     var unit = button.data('unit');
     var start = button.data('start');
     var end = button.data('end');
+    var now = button.data('now');
     var cover = button.data('currentcover');
     var modal = $(this);
 
@@ -42,7 +43,7 @@ $(document).ready(function () {
     modal.find('.modal-amount').attr('value', amount);
     modal.find('.modal-unit').attr('value', unit);
     modal.find('.modal-start').attr('value', start);
-    modal.find('.modal-start').attr('min', start);
+    modal.find('.modal-start').attr('min', now);
     modal.find('.modal-end').attr('value', end);
     modal.find('.modal-end').attr('min', start);
     modal.find('.modal-cover').attr('value', cover);
