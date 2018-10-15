@@ -47,20 +47,20 @@ module.exports = (db) => {
         if (queryResult) {
           response.render('user/New', { error: 'Username already exists.' });
         } else {
-          return db.user.create(request.body);
+          return db.user.create(request.body)
+            .then(queryResult => {
+              const hashedUserId = sha256(queryResult.id + 'loggedIn' + SALT);
+              response.cookie('userId', queryResult.id);
+              response.cookie('username', queryResult.name);
+              response.cookie('loggedIn', hashedUserId);
+              response.redirect('/');
+            })
         }
-      })
-      .then(queryResult => {
-        const hashedUserId = sha256(queryResult.id + 'loggedIn' + SALT);
-        response.cookie('userId', queryResult.id);
-        response.cookie('username', queryResult.name);
-        response.cookie('loggedIn', hashedUserId);
-        response.redirect('/');
       })
       .catch(error => {
         console.log(error);
         response.sendStatus(500);
-      })
+      });
   };
 
   return {
