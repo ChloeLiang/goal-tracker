@@ -1,5 +1,5 @@
 const React = require('react');
-const Layout = require('../layout/Layout');
+const Navigation = require('../layout/Navigation');
 
 class New extends React.Component {
   render() {
@@ -14,8 +14,8 @@ class New extends React.Component {
     }
 
     return (
-      <Layout>
-        <div className="container mt-5">
+      <Navigation>
+        <div className="container mt-5 pt-5">
           <div className="row">
             <div className="col-md-6 mx-auto">
               <h1 className="mb-3">Register</h1>
@@ -48,7 +48,7 @@ class New extends React.Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </Navigation>
     );
   }
 }
