@@ -46,9 +46,11 @@ class Show extends React.Component {
         <body>
           <TopNav username={this.props.username} />
           <div className="container detail" data-goalid={goal.id} data-labels={labels} data-history={history}>
-            <div className="row">
+            <div className="row text-center">
               <div className="col-12">
                 <h3>{goal.title}</h3>
+                <p className="m-0">{start} ~ {end}</p>
+                <p>{goal.progress} / {goal.amount} {goal.unit}</p>
               </div>
               <div className="col-12">
                 <canvas id="myChart" height="120"></canvas>
