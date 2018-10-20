@@ -43,9 +43,7 @@ $(document).ready(function () {
     modal.find('.modal-amount').attr('value', amount);
     modal.find('.modal-unit').attr('value', unit);
     modal.find('.modal-start').attr('value', start);
-    modal.find('.modal-start').attr('min', now);
     modal.find('.modal-end').attr('value', end);
-    modal.find('.modal-end').attr('min', start);
     modal.find('.modal-cover').attr('value', cover);
 
     modal.find('.modal-start').on('change', function (event) {
