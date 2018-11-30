@@ -55,7 +55,6 @@ class Index extends React.Component {
           </div>
         );
       });
-
     } else {
       upcomingList = (
         <div className="col text-center">
@@ -82,7 +81,7 @@ class Index extends React.Component {
           <div id="ongoing" className="container-fluid my-3">
             <div className="row text-center mb-3">
               <div className="col">
-                <h6 className="border border-secondary rounded d-inline px-5 py-1">Ongoing</h6>
+                <h6 className="col-heading">Ongoing</h6>
               </div>
             </div>
             <div className="row container-goal">
@@ -94,23 +93,19 @@ class Index extends React.Component {
           <div id="upcoming" className="container-fluid my-3">
             <div className="row">
               <div className="col text-center mb-3">
-                <h6 className="border border-secondary rounded d-inline px-5 py-1">Upcoming</h6>
+                <h6 className="col-heading">Upcoming</h6>
               </div>
             </div>
-            <div className="row container-goal">
-              {upcomingList}
-            </div>
+            <div className="row container-goal">{upcomingList}</div>
           </div>
 
           <div id="completed" className="container-fluid my-3">
             <div className="row">
               <div className="col text-center mb-3">
-                <h6 className="border border-secondary rounded d-inline px-5 py-1">Completed</h6>
+                <h6 className="col-heading">Completed</h6>
               </div>
             </div>
-            <div className="row container-goal">
-              {completedList}
-            </div>
+            <div className="row container-goal">{completedList}</div>
           </div>
         </div>
       </Navigation>

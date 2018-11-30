@@ -25,7 +25,7 @@ class Progress extends React.Component {
       multiplier = 0;
     }
 
-    const target = Math.ceil(goal.amount / diff * multiplier);
+    const target = Math.ceil((goal.amount / diff) * multiplier);
 
     let secondBarStyle, firstBarWidth, secondBarWidth;
     const barStyle = 'progress-bar';
@@ -42,52 +42,92 @@ class Progress extends React.Component {
       secondBarWidth = progress - target;
     }
 
-    firstBarWidth = firstBarWidth / goal.amount * 100 + '%';
-    secondBarWidth = secondBarWidth / goal.amount * 100 + '%';
-    const progressPercentage = Math.floor(progress / goal.amount * 100) + '%';
-    const targetPercentage = Math.floor(target / goal.amount * 100) + '%';
+    firstBarWidth = (firstBarWidth / goal.amount) * 100 + '%';
+    secondBarWidth = (secondBarWidth / goal.amount) * 100 + '%';
+    const progressPercentage = Math.floor((progress / goal.amount) * 100) + '%';
+    const targetPercentage = Math.floor((target / goal.amount) * 100) + '%';
 
-    let display = 'd-flex'
+    let display = 'd-flex';
     let date;
     if (goal.status === 3) {
       display = 'd-none';
-      date = <small className="card-subtitle text-white bg-success rounded p-1">{moment(goal.complete_date).format('YYYY-MM-DD')}</small>;
+      date = (
+        <small className="card-subtitle text-white bg-success rounded p-1">
+          {moment(goal.complete_date).format('YYYY-MM-DD')}
+        </small>
+      );
     } else if (goal.status === 1) {
-      date = <small className="card-subtitle text-white bg-danger rounded p-1">{moment(goal.end_date).format('YYYY-MM-DD')}</small>;
+      date = (
+        <small className="card-subtitle text-white bg-danger rounded p-1">
+          {moment(goal.end_date).format('YYYY-MM-DD')}
+        </small>
+      );
     } else {
-      date = <small className="card-subtitle text-muted">{moment(goal.end_date).format('YYYY-MM-DD')}</small>;
+      date = (
+        <small className="card-subtitle text-muted">
+          {moment(goal.end_date).format('YYYY-MM-DD')}
+        </small>
+      );
     }
 
     return (
-      <div className='card-body'>
+      <div className="card-body">
         <p className="mb-0 text-left">{goal.title}</p>
         {date}
         <div className="container-fluid">
           <div className={`row my-1 ${display}`}>
             <div className="d-flex flex-grow-1 justify-content-start align-items-end">
-              <span>{progress} / {target}</span>
+              <span>
+                {progress} / {target}
+              </span>
               <small className="ml-1">{goal.unit}</small>
             </div>
 
             <div className="d-flex">
-              <button type="button" className="btn btn-sm btn-outline-primary rounded-circle" data-toggle="modal" data-target="#updateProgressModal" data-goalid={goal.id} data-type="update">
-                <i className="fas fa-pencil-alt"></i>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-info rounded-circle"
+                data-toggle="modal"
+                data-target="#updateProgressModal"
+                data-goalid={goal.id}
+                data-type="update"
+              >
+                <i className="fas fa-pencil-alt" />
               </button>
               <UpdateModal />
 
-              <button type="button" className="btn btn-sm btn-outline-primary rounded-circle ml-1" data-toggle="modal" data-target="#addProgressModal" data-goalid={goal.id} data-type="add">
-                <i className="fas fa-plus"></i>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-info rounded-circle ml-1"
+                data-toggle="modal"
+                data-target="#addProgressModal"
+                data-goalid={goal.id}
+                data-type="add"
+              >
+                <i className="fas fa-plus" />
               </button>
               <AddModal />
             </div>
           </div>
         </div>
 
-        <div className={`progress mt-2 ${display}`} data-toggle="tooltip" data-placement="bottom" title={`${progressPercentage} / ${targetPercentage}`}>
-          <div className='progress-bar' role="progressbar" style={{ width: firstBarWidth }}></div>
-          <div className={secondBarStyle} role="progressbar" style={{ width: secondBarWidth }}></div>
+        <div
+          className={`progress mt-2 ${display}`}
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title={`${progressPercentage} / ${targetPercentage}`}
+        >
+          <div
+            className="progress-bar"
+            role="progressbar"
+            style={{ width: firstBarWidth }}
+          />
+          <div
+            className={secondBarStyle}
+            role="progressbar"
+            style={{ width: secondBarWidth }}
+          />
         </div>
-
       </div>
     );
   }

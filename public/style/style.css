@@ -1,5 +1,7 @@
 body {
-  background: rgba(240, 236, 236, 0.5);
+  font-family: 'Signika', sans-serif;
+  background: linear-gradient(to bottom, #fdfbfb, #ebedee);
+  /* background: linear-gradient(to bottom, #29323c, #485563); */
 }
 
 button i {
@@ -15,13 +17,18 @@ button i {
   background-position: 50% 50%;
 }
 
+nav.bg-dark {
+  background: linear-gradient(to right, #485563, 70%, #29323c) !important;
+  box-shadow: 0 3px 8px;
+}
+
 .hero-image {
   width: 100%;
   height: 100%;
 }
 
 .container-goal::-webkit-scrollbar {
-  width: .2rem;
+  width: 0.2rem;
 }
 
 .container-goal::-webkit-scrollbar-thumb {
@@ -40,8 +47,31 @@ button i {
   padding: 60px 0;
 }
 
+.col-heading {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  /* color: whitesmoke; */
+  transition: all 0.3s;
+}
+
 .detail {
   padding-top: 70px;
+}
+
+.card {
+  border-radius: 0;
+  /* border: 1px solid grey; */
+}
+
+.card-header {
+  background-color: #f5f7fe;
+}
+
+.card-body {
+  /* background-color: #546170; */
+  background-color: #f5f7ff;
+  /* background: linear-gradient(to bottom, #f5f7fa, 80%, #c3cfe2); */
 }
 
 .card-img-top {
@@ -58,7 +88,7 @@ button i {
   bottom: 0;
   right: 0;
   margin: 2rem;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 .dropdown-toggle::after {
@@ -66,11 +96,9 @@ button i {
 }
 
 @media (min-width: 576px) {
-
 }
 
 @media (min-width: 768px) {
-
 }
 
 @media (min-width: 992px) {
@@ -113,7 +141,4 @@ button i {
   #completed {
     order: 3;
   }
-}
-
-@media (min-width: 1200px) {
 }

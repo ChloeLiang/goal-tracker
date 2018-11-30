@@ -12,34 +12,72 @@ class Goal extends React.Component {
 
     let cover;
     if (goal.cover) {
-      cover = <img className="card-img-top mt-3" src={goal.cover} alt="cover image"></img>;
+      cover = (
+        <img className="card-img-top mt-3" src={goal.cover} alt="cover image" />
+      );
     }
 
     return (
-      <div className="card shadow-sm border-secondary">
+      <div className="card shadow-sm">
         <Edit />
 
-        <div className="card-header text-right py-1 bg-light">
+        <div className="card-header text-right py-1">
           <div className="dropdown">
-            <button className="btn bg-transparent dropdown-toggle py-0" type="button" id="dropdownGoalMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i className="fas fa-ellipsis-h"></i>
+            <button
+              className="btn bg-transparent dropdown-toggle py-0"
+              type="button"
+              id="dropdownGoalMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i className="fas fa-ellipsis-h" />
             </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownGoalMenuButton">
-              <a href={`/goals/${goal.id}`} className="dropdown-item">Detail</a>
-              <button type="button" className="btn dropdown-item" data-toggle="modal" data-target="#editGoalModal" data-goalid={goal.id} data-title={goal.title} data-amount={goal.amount} data-unit={goal.unit} data-start={startDate.format('YYYY-MM-DD')} data-end={endDate.format('YYYY-MM-DD')} data-currentcover={goal.cover} data-now={now}>Edit</button>
-              <form action={`/goals/${goal.id}/cover?_method=PUT`} method="POST">
-                <input type="submit" className="btn dropdown-item" value="Remove cover" />
+            <div
+              className="dropdown-menu"
+              aria-labelledby="dropdownGoalMenuButton"
+            >
+              <a href={`/goals/${goal.id}`} className="dropdown-item">
+                Detail
+              </a>
+              <button
+                type="button"
+                className="btn dropdown-item"
+                data-toggle="modal"
+                data-target="#editGoalModal"
+                data-goalid={goal.id}
+                data-title={goal.title}
+                data-amount={goal.amount}
+                data-unit={goal.unit}
+                data-start={startDate.format('YYYY-MM-DD')}
+                data-end={endDate.format('YYYY-MM-DD')}
+                data-currentcover={goal.cover}
+                data-now={now}
+              >
+                Edit
+              </button>
+              <form
+                action={`/goals/${goal.id}/cover?_method=PUT`}
+                method="POST"
+              >
+                <input
+                  type="submit"
+                  className="btn dropdown-item"
+                  value="Remove cover"
+                />
               </form>
               <form action={`/goals/${goal.id}?_method=DELETE`} method="POST">
-                <input type="submit" className="btn dropdown-item" value="Delete" />
+                <input
+                  type="submit"
+                  className="btn dropdown-item"
+                  value="Delete"
+                />
               </form>
             </div>
           </div>
         </div>
         {cover}
-        <Progress
-          goal={goal}
-        />
+        <Progress goal={goal} />
       </div>
     );
   }
