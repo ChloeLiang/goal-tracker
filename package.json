@@ -27,6 +27,6 @@
     "sha256": "^0.2.0"
   },
   "devDependencies": {
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.6"
   }
 }
